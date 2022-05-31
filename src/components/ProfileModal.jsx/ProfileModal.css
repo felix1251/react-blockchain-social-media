@@ -1,0 +1,20 @@
+.Profile-Modal{
+      background-color: var(--card-background);
+      color: var(--white);
+      width: 55%;
+      border-radius: 20px;
+}
+
+
+@media only screen and (max-width: 1600px) {
+      .Profile-Modal{
+            width: 80%;  
+      }
+}
+
+@media only screen and (max-width: 600px) {
+      .Profile-Modal{
+            width: 100%;  
+            padding: 10px;
+      }
+}

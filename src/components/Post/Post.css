@@ -1,0 +1,42 @@
+.Post{
+    display: flex;
+    flex-direction: column;
+    background-color: var(--card-background);
+    border-radius: .8rem;
+    /* gap: 1rem; */
+}
+
+.Header{
+    padding: .8rem 1rem;
+    display: flex;
+    flex-direction:row;
+    gap: 1rem;
+    align-items: center;
+}
+
+.Header>img{
+    border-radius: 50%;
+    width: 3rem;
+    height: 3rem;
+}
+
+.Infos{
+    display: flex;
+    flex-direction: column;
+    padding: .8rem 1rem;
+    gap: .5rem;
+}
+
+.Post>img{
+    width: 100%;
+    /* max-height: 20rem; */
+    object-fit: cover;
+}
+
+.postReact{
+    display: flex;
+    align-items: flex-start;
+    gap: 1.5rem;
+    /* margin-bottom: 10px; */
+}
+

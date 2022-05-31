@@ -1,0 +1,89 @@
+:root {
+  --yellow: #f5c32c;
+  --orange: #ff5e62;
+  --black: #242d49;
+  --white: #ffffff;
+  --gray: rgba(36, 45, 73, 0.65);
+  --profileShadow: 0px 4px 17px 2px rgba(0, 0, 0, 0.25);
+  --hrColor: #cfcdcd;
+  --cardColor: rgba(255, 255, 255, 0.64);
+  --buttonBg: linear-gradient(to right, #ff9966, #ff5e62);
+  --post-button: linear-gradient(120deg, #d4fc79 0%, #96e6a1 100%);
+  --inputColor: rgba(128, 127, 127, 0.329);
+  --photo: #ffffff;
+  --video: #4A4EB7;
+  --location: #EF5757;
+  --card-background: #1d1d1d;
+  --main-background: #2b2b2b;
+  --shedule: #E1AE4A;
+}
+
+body{
+  margin: 0;
+  background: var(--main-background);
+}
+
+.App{
+  overflow: hidden;
+  color: var(--white);
+  padding: 1rem 1rem;
+}
+
+::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: rgb(192, 192, 192);
+  opacity: 1; /* Firefox */
+}
+
+@media only screen and (max-width: 500px) {
+  .App {
+    padding: .5rem .5rem;
+  }
+}
+
+.blur{
+  position: absolute;
+  width: 22rem;
+  height: 14rem;
+  border-radius: 50%;
+  background: #a6ddf0;
+  filter: blur(72px)
+}
+
+input{
+  color: white;
+}
+
+.button{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  border:none;
+  border-radius: 0.5rem;
+  background: var(--buttonBg);
+  transition:all 100ms ease-out;
+  font-weight: 700;
+}
+
+.post-button{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgb(255, 255, 255);
+  border:none;
+  font-weight: 700;
+  border-radius: 0.5rem;
+  background: var(--buttonBg);
+  transition:all 100ms ease-out;
+}
+
+.button:hover{
+  cursor: pointer;
+  color: var(--orange);
+  background: transparent;
+  border: 2px solid var(--orange);
+}
+
+::-webkit-scrollbar{
+  display: none;
+}
