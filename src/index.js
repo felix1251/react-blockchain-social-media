@@ -1,9 +1,15 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import App from "./App";
+import { MoralisProvider } from "react-moralis";
+
+const appId = "GMQ9ayspEh5FappfTjZf8WI2CILLRGoJJnAyNK1X" 
+const serverUrl = "https://wqpbdgnhokwv.usemoralis.com:2053/server"
 
 ReactDOM.render(
-  <App/>,
+  <MoralisProvider appId={appId} serverUrl={serverUrl} >
+    <App />
+  </MoralisProvider>,
   document.getElementById("root")
 );
 

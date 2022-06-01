@@ -2,7 +2,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 100vh;
+    height: 96vh;
     gap: 4rem;
     position: relative;
   }
@@ -12,7 +12,6 @@
     align-items: center;
     justify-content: center;
   }
-  
   
   
   /* left side */
@@ -28,6 +27,7 @@
   .Webname > h1 {
       font-size: 3rem;
       background-color: red;
+      margin: 0;
     
       /* Create the gradient. */
       background-image: var(--buttonBg);
@@ -46,6 +46,14 @@
   
   .Webname>h6{
       font-size: 0.85rem;
+      margin: 0;
+  }
+
+  .Sign{
+    display: flex;
+    gap: 1rem;
+    flex-direction: column;
+    align-items: center;
   }
 
 

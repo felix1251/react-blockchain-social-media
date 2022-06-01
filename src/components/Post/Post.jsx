@@ -22,7 +22,7 @@ const Post = ({ data }) => {
         </div>
         <span style={{ color: "var(--white)", fontSize: '12px' }}>{data.likes} likes</span>
         <div className="Details">
-          <span><b>{data.name}</b></span>
+          <span><b>{data.name}</b></span>{" "}
           <span>{data.desc}</span>
         </div>
       </div>

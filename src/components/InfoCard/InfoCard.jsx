@@ -2,9 +2,11 @@ import React, { useState } from "react";
 import "./InfoCard.css";
 import { UilPen } from "@iconscout/react-unicons";
 import ProfileModal from "../ProfileModal.jsx/ProfileModal";
+import { useMoralis } from "react-moralis";
 
 const InfoCard = () => {
   const [modalOpened, setModalOpened] = useState(false);
+  const {logout} = useMoralis()
   return (
     <div className="InfoCard">
       <div className="infoHead">
@@ -43,7 +45,7 @@ const InfoCard = () => {
         <span>Zainkeepscode inst</span>
       </div>
 
-      <button className="button logout-button">Logout</button>
+      <button className="button logout-button" onClick={()=> logout()}>Logout</button>
     </div>
   );
 };

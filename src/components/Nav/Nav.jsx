@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { UilBell, UilCommentAltDots, UilUserCircle, UilSearch, UilImagePlus } from "@iconscout/react-unicons";
+import { UilBell, UilCommentAltDots, UilUserCircle, UilSearch, UilImagePlus, UilUsersAlt } from "@iconscout/react-unicons";
 import { UisHouseUser } from '@iconscout/react-unicons-solid'
 import "./Nav.css";
 import { Link } from "react-router-dom";
@@ -14,8 +14,9 @@ const Nav = () => {
                   <Link to="/u">
                         <UilUserCircle className="Icon" />
                   </Link>
-                  <UilImagePlus className="Icon Hide-Show-Icon" onClick={() => setModalOpened(true)}/>
+                  <UilImagePlus className="Icon Hide-Show-Icon" onClick={() => setModalOpened(true)} />
                   <UilSearch className="Icon Hide-Show-Icon" />
+                  <UilUsersAlt className="Icon"/>
                   <UilBell className="Icon" />
                   <UilCommentAltDots className="Icon" />
                   <ShareModal modalOpened={modalOpened} setModalOpened={setModalOpened} />
