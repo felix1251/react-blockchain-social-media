@@ -5,3 +5,9 @@
     /* height: 96vh; */
     overflow: auto;
 }
+
+.loader{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}

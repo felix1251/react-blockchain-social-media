@@ -8,27 +8,34 @@ import {
   Route,
   Navigate,
 } from "react-router-dom";
+import Logo from "../src/img/logo.png";
 import ProtectedRoutes from "./ProtectedRoutes";
 import { useMoralis } from "react-moralis";
 import ConnectButtonProvider from "./components/ConnectMoralis/ConnectButton";
+import { useEffect } from "react";
 function App() {
+  // eslint-disable-next-line
+  const { isAuthenticated, account, Moralis } = useMoralis()
+  // useEffect(()=>{
+  //   if(account)
+  // })
 
-  const { isAuthenticated } = useMoralis()
   return (
     <div className="App">
+      {isAuthenticated && <img className="logo-header" src={Logo} alt="" />}
       <ConnectButtonProvider/>
       <BrowserRouter>
         <Routes>
           <Route element={<ProtectedRoutes />}>
             <Route path="/h" element={<Home />} />
-            <Route path="/u" element={<Profile />} />
+            <Route path="/u/:address" element={<Profile />} />
           </Route>
           {isAuthenticated &&
             <Route path="/auth" element={<Auth />} />
           }
           <Route
             path="*"
-            element={<Navigate to="/h" />}
+            element={<Navigate to="/h"/>}
           />
         </Routes>
       </BrowserRouter>

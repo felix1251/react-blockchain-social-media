@@ -18,6 +18,19 @@
   --shedule: #E1AE4A;
 }
 
+.logo-header{
+  width: 3rem;
+  height: 3rem;
+  position: fixed;
+}
+
+@media only screen and (max-width: 1600px) {
+  .logo-header {
+      display: none;
+  }
+}
+
+
 body{
   margin: 0;
   background: var(--main-background);

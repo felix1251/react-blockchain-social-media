@@ -1,7 +1,7 @@
 .LogoSearch{
     display: flex;
     gap: 0.75rem;
-    justify-content: space-between;;
+    justify-content: flex-end;
 }
 
 .Search{
@@ -9,6 +9,7 @@
     background-color: var(--inputColor);
     border-radius: 10px;
     padding: 5px 10px;
+    float: right;
 }
 
 .Search>input{

@@ -34,12 +34,23 @@
     flex-direction: column;
     align-items: center;
     margin-top: 3rem;
-    gap: 10px;
+    gap: 8px;
 }
 
 .ProfileName>span:nth-of-type(1)
 {
     font-weight: bold;
+}
+
+.ProfileName>span:nth-of-type(3)
+{
+    font-size: 15px;
+}
+
+.ProfileName>span:nth-of-type(2)
+{
+    color: grey;
+    font-size: 14px;
 }
 
 /* Follow Status */
@@ -79,6 +90,7 @@
     color: var(--white);
     font-size: 13px;
   }
+  
   
   .vl {
     height: 150%;

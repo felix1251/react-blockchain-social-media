@@ -2,12 +2,12 @@ import React from 'react'
 import FollowersCard from '../FollowersCard/FollowersCard'
 import InfoCard from '../InfoCard/InfoCard'
 import Nav from '../Nav/Nav';
-const ProfileLeft = () => {
+const ProfileLeft = ({isParamsEqualToAccount}) => {
   return (
     <div className="ProfileSide">
       {/* <LogoSearch /> */}
       <Nav/>
-      <InfoCard />
+      {isParamsEqualToAccount && <InfoCard />}
       <FollowersCard />
     </div>
   )

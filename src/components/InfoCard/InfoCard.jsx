@@ -10,7 +10,7 @@ const InfoCard = () => {
   return (
     <div className="InfoCard">
       <div className="infoHead">
-        <h4>Your Info</h4>
+        <h4>Edit Info</h4>
         <div>
           <UilPen
             width="2rem"
@@ -23,28 +23,6 @@ const InfoCard = () => {
           />
         </div>
       </div>
-
-      <div className="info">
-        <span>
-          <b>Status </b>
-        </span>
-        <span>in Relationship</span>
-      </div>
-
-      <div className="info">
-        <span>
-          <b>Lives in </b>
-        </span>
-        <span>Multan</span>
-      </div>
-
-      <div className="info">
-        <span>
-          <b>Works at </b>
-        </span>
-        <span>Zainkeepscode inst</span>
-      </div>
-
       <button className="button logout-button" onClick={()=> logout()}>Logout</button>
     </div>
   );

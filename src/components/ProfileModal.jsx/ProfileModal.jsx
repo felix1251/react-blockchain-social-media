@@ -1,8 +1,29 @@
-import { Modal, useMantineTheme } from "@mantine/core";
+import { Modal, useMantineTheme, Input, InputWrapper } from "@mantine/core";
+import { useState } from "react";
+import { useMoralis } from "react-moralis";
 
 import "./ProfileModal.css"
 function ProfileModal({ modalOpened, setModalOpened }) {
   const theme = useMantineTheme();
+  const { Moralis } = useMoralis()
+  const user = Moralis.User.current()
+  const [username, setUsername] = useState(user.attributes.username)
+  const [bio, setBio] = useState(user.attributes.bio)
+
+  const update = async (e) =>{
+    e.preventDefault()
+    const User = Moralis.Object.extend("_User")
+    const query = new Moralis.Query(User)
+    const myDetails = await query.first()
+    if(bio){
+      myDetails.set("bio", bio)
+    }
+    if(username){
+      myDetails.set("username", username)
+    }
+    await myDetails.save()
+    window.location.reload()
+  }
 
   return (
     <Modal
@@ -11,69 +32,41 @@ function ProfileModal({ modalOpened, setModalOpened }) {
       }
       overlayOpacity={0.55}
       overlayBlur={3}
-      classNames={{ modal: 'Profile-Modal'}}
+      classNames={{ modal: 'Profile-Modal' }}
       opened={modalOpened}
       onClose={() => setModalOpened(false)}
     >
-      <form className="infoForm">
-        <h3>Your info</h3>
-
+      <form className="infoForm" onSubmit={update}>
+        <h3>Edit Info</h3>
         <div>
+          <span><b>Username</b></span>
           <input
             type="text"
+            defaultValue={username}
             className="infoInput"
-            name="FirstName"
-            placeholder="First Name"
-          />
-
-          <input
-            type="text"
-            className="infoInput"
-            name="LastName"
-            placeholder="Last Name"
+            name="Username"
+            onChange={(e)=> setUsername(e.target.value)}
+            placeholder="Username"
           />
         </div>
-
         <div>
-          <input
+        <span><b>Bio</b></span>
+          <textarea
+            rows={3}
             type="text"
-            className="infoInput"
-            name="worksAT"
-            placeholder="Works at"
+            defaultValue={bio}
+            className="infoInput area"
+            name="bio"
+            onChange={(e)=> setBio(e.target.value)}
+            placeholder="Write your bio.."
           />
         </div>
-
-        <div>
-          <input
-            type="text"
-            className="infoInput"
-            name="livesIN"
-            placeholder="LIves in"
-          />
-
-          <input
-            type="text"
-            className="infoInput"
-            name="Country"
-            placeholder="Country"
-          />
-        </div>
-
-        <div>
-          <input
-            type="text"
-            className="infoInput"
-            placeholder="RelationShip Status"
-          />
-        </div>
-
-
-        <div>
+        {/* <div>
             Profile Image 
             <input type="file" name='profileImg'/>
             Cover Image
             <input type="file" name="coverImg" />
-        </div>
+        </div> */}
 
         <button className="button infoButton">Update</button>
       </form>
