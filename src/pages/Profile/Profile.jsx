@@ -12,7 +12,6 @@ import './Profile.css'
 
 const Profile = () => {
   const { address } = useParams();
-  const [posts, setPosts] = useState()
   const { Moralis } = useMoralis()
 
   const isParamsEqualToAccount = () => {
@@ -28,8 +27,7 @@ const Profile = () => {
         <ProfileCard />
         <div className="Profile-post">
           {isParamsEqualToAccount() && <PostShare />}
-          <Posts posts={posts} />
-          { <div className='loader'><Loader /></div>}
+          <Posts/>
         </div>
       </div>
       <ProfileLeft isParamsEqualToAccount={isParamsEqualToAccount()} />

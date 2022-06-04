@@ -9,7 +9,7 @@ const PostShare = () => {
   const [image, setImage] = useState(null);
   const [file, setFile] = useState();
   const [loading, setLoading] = useState(false);
-  const [desc, setDesc] = useState();
+  const [desc, setDesc] = useState("");
   const imageRef = useRef();
   const { Moralis } = useMoralis()
 
@@ -20,31 +20,13 @@ const PostShare = () => {
       const data = file
       const fileData = new Moralis.File(data.name, data)
       await fileData.saveIPFS()
-      await Moralis.Cloud.run("test", { desc: desc, ipfsHash: fileData.ipfs() });
+      const res = await Moralis.Cloud.run("createPost", { desc: desc, ipfsHash: fileData.ipfs() });
+      setDesc("")
       setLoading(false)
     } else {
-      alert("Select a photo firts")
+      alert("Select a photo first")
     }
   }
-
-  // const savePost = async(e) => {
-  //   e.preventDefault()
-  //   const Posts = Moralis.Object.extend("Posts")
-  //   const newPost = new Posts();
-  //   newPost.set("postOwnerAcc", account)
-  //   newPost.set("postDescription", desc )
-
-  //   if(file){
-  //     const data = file
-  //     const fileData = new Moralis.File(data.name, data)
-  //     await fileData.saveIPFS()
-  //     newPost.set("postImage", fileData.ipfs())
-  //   }
-
-  //   newPost.set("userId", data[0].objectId)
-  //   await newPost.save();
-  //   window.location.reload()
-  // }
 
   const onImageChange = (event) => {
     if (event.target.files && event.target.files[0]) {
@@ -58,7 +40,7 @@ const PostShare = () => {
     <div className="PostShare">
       <img src={ProfileImage} alt="" />
       <form onSubmit={(e) => create(e)}>
-        <input type="text" required value={desc} onChange={e => setDesc(e.target.value)} placeholder="Share your thoughts..." />
+        <input type="text" required defaultValue={desc} onChange={e => setDesc(e.target.value)} placeholder="Share your thoughts..." />
         <div className="postOptions">
           <div className="option" style={{ color: "var(--photo)" }}
             onClick={() => imageRef.current.click()}

@@ -1,34 +1,99 @@
-import React from 'react'
+import React, { useState } from 'react'
 import './Post.css'
-import Comment from '../../img/comment.png'
-import Share from '../../img/share.png'
-import Heart from '../../img/like.png'
-import NotLike from '../../img/notlike.png'
 import ProfileImage from "../../img/profileImg.jpg";
 import { Link } from 'react-router-dom'
+import { UilCommentDots, UilShare, UilRocket, UilMessage } from '@iconscout/react-unicons'
+import { UisRocket } from '@iconscout/react-unicons-solid'
+import { ActionIcon, Input, Indicator } from '@mantine/core';
+import { useMoralis } from "react-moralis";
+
 
 const Post = ({ data }) => {
+  const { Moralis } = useMoralis()
+  const [like, setLiked] = useState(data?.likedByMe)
+  const [likeCount, setLikeCount] = useState(data?.likes?.metadata?.total)
+  const [commentCount, setCommentCount] = useState(data?.comments?.metadata?.total)
+  const [comment, setComment] = useState("")
+  const [loading, setLoading] = useState(false)
+
+  const createComment = async (e) => {
+    e.preventDefault()
+    if (comment) {
+      const res = await Moralis.Cloud.run("createComment", { postId: data.objectId, comment: comment });
+      setCommentCount(commentCount + 1)
+      setComment("")
+      setLoading(true)
+    } else {
+      alert("Comment must not empty, type something firts!")
+    }
+    setLoading(false)
+  }
+
+  const likePost = async (e) => {
+    e.preventDefault()
+    setLoading(true)
+    setLiked(!like)
+    const res = await Moralis.Cloud.run("likePost", { postId: data.objectId });
+    if (res.status === "liked") {
+      setLikeCount(likeCount + 1)
+    } else {
+      setLikeCount(likeCount - 1)
+    }
+    setLoading(false)
+  }
+
   return (
     <div className="Post">
       <div className="Header">
         <Link to={`/u/${data?.postOwnerAcc}`}>
           <img className='Header-Image' src={ProfileImage} alt="" />
         </Link>
-        {/* <span><b>{data?.ownerDetails.username}</b></span> */}
+        <span><b>{data?.ownerData.username}</b></span>
       </div>
-      <img src={data?.postImage} alt="" />
+      <div className='image'>
+        <img src={data?.postImage} alt="" />
+      </div>
       <div className='Infos'>
         <div className="postReact">
-          <img src={data?.liked ? Heart : NotLike} alt="" />
-          <img src={Comment} alt="" />
-          <img src={Share} alt="" />
+          {like ? <UisRocket onClick={e => likePost(e)} className="Post-Icon-Liked" /> : <UilRocket className="Post-Icon" onClick={e => likePost(e)} />}
+          <Indicator inline label={commentCount} size={17} color="red" offset={5} position="bottom-end" disabled={commentCount > 0 ? false : true}>
+            <UilCommentDots className="Post-Icon" />
+          </Indicator>
+          <UilShare className="Post-Icon" />
         </div>
-        <span style={{ color: "var(--white)", fontSize: '12px' }}>{data?.likes} likes</span>
         <div className="Details">
-          {/* <span><b>{data?.ownerDetails.username}</b></span>{" "} */}
+          <span><b>{data?.ownerData.username}</b></span>{" "}
           <span>{data?.postDescription}</span>
         </div>
+        <span style={{ color: "var(--white)", fontSize: '14px' }}>{likeCount} rocket likes</span>
+        {data.comments.lazy_data.length > 0 && <><hr className='line' />
+          <h4 className='Header-Comments'>Comments</h4>
+          {data.comments.lazy_data.map((comm, key) => (
+            <div key={key} className="Comments">
+              <span><b>{comm.commenterData.username}</b></span>{" "}
+              <span>{comm.comment.slice(0, 40)}{comm.comment.length >= 40 && ".... show more"}</span>
+            </div>
+          ))}
+          {commentCount > 3 && <span className='show-more'>show more comments...</span>}
+        </>
+        }
       </div>
+
+      <form className='Send'>
+        <Input
+          placeholder="Send comment...."
+          size="md"
+          required
+          value={comment}
+          rightSectionWidth={70}
+          onChange={(e) => setComment(e.currentTarget.value)}
+          rightSection={
+            <ActionIcon radius="lg" size="xl" variant="transparent">
+              <UilMessage className="Post-Icon" onClick={(e) => createComment(e)} />
+            </ActionIcon>
+          }
+        />
+      </form>
     </div>
   )
 }

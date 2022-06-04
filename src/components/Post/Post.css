@@ -5,8 +5,23 @@
     border-radius: .8rem;
     /* gap: 1rem; */
 }
+.Post-Icon{
+    height: 2rem;
+    width: 2rem;
+    cursor: pointer;
+    color: var(--white);
+}
 
+.Post-Icon-Liked{
+    height: 2rem;
+    width: 2rem;
+    cursor: pointer;
+    color:  var(--liked);
+}
 
+.Post-Icon:hover{
+    color: var(--shedule);
+}
 .Header{
     padding: .8rem .9rem;
     display: flex;
@@ -32,7 +47,14 @@
     gap: .5rem;
 }
 
-.Post>img{
+.image{
+    position: relative;
+}
+
+.rocket{
+    position: absolute;
+}
+.Post>div>img{
     width: 100%;
     /* max-height: 20rem; */
     object-fit: cover;
@@ -46,7 +68,45 @@
      margin-bottom: 10px; */
 }
 
-.Details>span{
+.Details{
+    margin-top: 10px;
+}
+
+.Comments>span{
     font-size: 14px;
 }
+
+.line{
+    width: 100%;
+}
+
+.show-more{
+    font-size: 15px;
+    cursor: pointer;
+    color: rgb(192, 192, 192);
+}
+
+.show-more:hover{
+    color: rgb(1, 175, 255);
+}
+.Details>span{
+    font-size: 16px;
+}
+
+.Header-Comments{
+    margin: 0;
+}
+
+.Send{
+    padding: 15px;
+}
+
+.mantine-rjykrt {
+    background-color: var(--card-background);
+    border: 1px solid var(--main-background);
+    border-radius: 20px;
+    color: var(--white);
+}
+
+
 

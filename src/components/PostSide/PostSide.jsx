@@ -4,12 +4,11 @@ import PostShare from '../PostShare/PostShare'
 import './PostSide.css'
 import { Loader } from '@mantine/core';
 
-const PostSide = ({posts, isLoading}) => {
+const PostSide = () => {
   return (
     <div className="PostSide">
       <PostShare />
-      <Posts posts={posts} />
-      {isLoading && <div className='loader'><Loader /></div>}
+      <Posts/>
     </div>
   )
 }
