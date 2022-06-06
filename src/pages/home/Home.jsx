@@ -1,17 +1,24 @@
-import React, { useEffect, useState } from 'react'
-import { useMoralisCloudFunction } from 'react-moralis'
-import PostSide from '../../components/PostSide/PostSide'
-import ProfileSide from '../../components/profileSide/ProfileSide'
-import RightSide from '../../components/RightSide/RightSide'
-import './Home.css'
+import React, { lazy, Suspense, useEffect, useState } from "react";
+import { useMoralis } from "react-moralis";
+import "./Home.css";
+const ProfileSide = lazy(() =>
+  import("../../components/profileSide/ProfileSide")
+);
+const RightSide = lazy(() => import("../../components/RightSide/RightSide"));
+const PostSide = lazy(() => import("../../components/PostSide/PostSide"));
+
 const Home = () => {
+  const [posts, setPosts] = useState([]);
+  
   return (
     <div className="Home">
-      <RightSide />
-      <PostSide/>
-      <ProfileSide />
+      <Suspense fallback={<div>Loading...</div>}>
+        <RightSide />
+        <PostSide posts={posts} />
+        <ProfileSide />
+      </Suspense>
     </div>
-  )
-}
+  );
+};
 
-export default Home
+export default Home;

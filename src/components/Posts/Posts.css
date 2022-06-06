@@ -1,5 +1,47 @@
-.Posts{
+.Posts {
     display: flex;
     flex-direction: column;
     gap: 1rem;
 }
+
+@media only screen and (max-width: 500px) {
+    .Posts {
+        gap: 0;
+    }
+}
+
+.mantine-Tabs-pills {
+    font-size: 17px;
+    color: var(--white);
+    height: 45px;
+    font-weight: 600;
+}
+
+@media only screen and (max-width: 500px) {
+    .mantine-Tabs-pills {
+        font-size: 15px;
+        font-weight: 600;
+    }
+}
+
+.mantine-11nsbuq {
+    gap: 0;
+    border-top: 0.5px solid rgb(46, 46, 46);
+    margin: 0;
+}
+
+.mantine-7t1ey3.__mantine-ref-tabActive {
+    border-radius: 0;
+}
+
+.mantine-j7do8t:hover {
+    background-color: grey;
+    border-radius: 0;
+}
+
+@media only screen and (max-width: 500px) {
+    .loader {
+        margin: 10px 8px;
+    }
+}
+

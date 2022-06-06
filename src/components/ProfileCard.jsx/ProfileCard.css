@@ -8,6 +8,12 @@
     background: var(--card-background);
 }
 
+@media only screen and (max-width: 500px) {
+  .ProfileCard {
+      border-radius: 0rem;
+  }
+}
+
 .ProfileImages{
     position: relative;
     display: flex;

@@ -1,32 +1,28 @@
-import React, {useState, useEffect} from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import './Posts.css'
 import Post from '../Post/Post'
-import { useMoralisCloudFunction } from 'react-moralis'
 import { Loader } from '@mantine/core'
-const Posts = () => {
+import { Tabs } from '@mantine/core';
+import { ArrowsDownUp, Rocket, Users } from 'tabler-icons-react';
 
-  const [posts, setPosts] = useState()
-  const { fetch, data, isLoading } = useMoralisCloudFunction("posts", { address: "" }, { autoFetch: false });
-
-  useEffect(() => {
-    const load = async () => {
-      fetch()
-    }
-    load()
-  }, [fetch])
+const Posts = ({ view, posts }) => {
 
   return (
     <div className="Posts">
-        {data  && data.map((post, id)=>{
-            return <Post data={post} id={id} key={id}/>
-        })}
-        {isLoading && <div className='loader'><Loader /></div>}
+      {view === "profile" &&
+        <>
+          <Tabs variant="pills" grow={true} style={{ backgroundColor: "var(--card-background)" }}>
+            <Tabs.Tab label="Newest" icon={<ArrowsDownUp size={20} />}></Tabs.Tab>
+            <Tabs.Tab label="Rockets" icon={<Rocket size={20} />}></Tabs.Tab>
+            <Tabs.Tab label="People" icon={<Users size={20} />}></Tabs.Tab>
+          </Tabs>
+        </>
+      }
+      {posts.map((post, id) => {
+        return <Post data={post} id={id} key={id} />
+      })}
+      <div className='loader'><Loader /></div>
     </div>
   )
 }
-
-// { addFields: {
-//   hashtags: { $regexFindAll: { input: "$comment", regex: /(?:\s|^)(?:#(?!(?:\d+|\w+?_|_\w+?)(?:\s|$)))(\w+)(?=\s|$)/i } }
-// } },
-
 export default Posts

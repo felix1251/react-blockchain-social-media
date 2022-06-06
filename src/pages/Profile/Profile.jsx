@@ -13,12 +13,24 @@ import './Profile.css'
 const Profile = () => {
   const { address } = useParams();
   const { Moralis } = useMoralis()
+  const [loading, setLoading] = useState(false)
+  const [posts, setPosts] = useState([])
 
   const isParamsEqualToAccount = () => {
     const user = Moralis.User.current()
     return user.attributes.ethAddress === address
   }
 
+  useEffect(() => {
+    const load = async () => {
+      setLoading(true)
+      const res = await Moralis.Cloud.run("userPosts", { userId: localStorage.getItem("lastViewdUserId") });
+      setPosts(res)
+      setLoading(false)
+    }
+    load()
+  }, [Moralis])
+  
 
   return (
     <div className="Profile">
@@ -27,7 +39,7 @@ const Profile = () => {
         <ProfileCard />
         <div className="Profile-post">
           {isParamsEqualToAccount() && <PostShare />}
-          <Posts/>
+          <Posts posts={posts} loading={loading} view="profile"/>
         </div>
       </div>
       <ProfileLeft isParamsEqualToAccount={isParamsEqualToAccount()} />

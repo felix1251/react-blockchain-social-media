@@ -3,7 +3,6 @@
     display: grid;
     grid-template-columns: 23rem auto 27rem;
     gap: 1rem;
-    height: 96vh;
 }
 
 @media only screen and (max-width: 1600px) {
@@ -15,5 +14,6 @@
 @media only screen and (max-width: 1200px) {
     .Home {
         grid-template-columns: auto;
+        height: 100vh;
     }
 }

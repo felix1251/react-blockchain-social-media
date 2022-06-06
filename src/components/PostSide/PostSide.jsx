@@ -1,14 +1,14 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import Posts from '../Posts/Posts'
 import PostShare from '../PostShare/PostShare'
 import './PostSide.css'
-import { Loader } from '@mantine/core';
 
-const PostSide = () => {
+const PostSide = ({ posts, loading, fetchData }) => {
+
   return (
     <div className="PostSide">
       <PostShare />
-      <Posts/>
+      <Posts posts={posts} loading={loading} view="feed" fetchData={fetchData}/>
     </div>
   )
 }

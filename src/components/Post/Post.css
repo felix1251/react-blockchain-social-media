@@ -1,66 +1,110 @@
-.Post{
+.Post {
     display: flex;
     flex-direction: column;
     background-color: var(--card-background);
-    border-radius: .8rem;
+    border-radius: 0.8rem;
     /* gap: 1rem; */
 }
-.Post-Icon{
+
+@media only screen and (max-width: 500px) {
+    .Post {
+        border-top: 1px solid rgb(46, 46, 46);
+        border-radius: 0;
+    }
+}
+
+.Post-Icon {
     height: 2rem;
     width: 2rem;
     cursor: pointer;
     color: var(--white);
 }
 
-.Post-Icon-Liked{
+.Post-Icon-Liked {
     height: 2rem;
     width: 2rem;
     cursor: pointer;
-    color:  var(--liked);
+    color: var(--liked);
 }
 
-.Post-Icon:hover{
+.Post-Icon:hover {
     color: var(--shedule);
 }
-.Header{
-    padding: .8rem .9rem;
+
+@media only screen and (max-width: 500px) {
+    .Post-Icon:hover {
+        color: var(--white);
+    }
+}
+
+.Header {
+    padding: 0.8rem 0.9rem;
     display: flex;
-    flex-direction:row;
+    flex-direction: row;
     gap: 1rem;
     align-items: center;
 }
 
-.Header-Image{
+@media only screen and (max-width: 500px) {
+    .Header {
+        padding: 0.5rem 0.5rem;
+        gap: 0.5rem;
+    }
+}
+
+.Header-Image {
     border-radius: 50%;
     width: 3rem;
     height: 3rem;
 }
 
-.Header>span{
+.Header>span {
     font-size: 16px;
 }
 
-.Infos{
+@media only screen and (max-width: 500px) {
+    .Header-Image {
+        width: 2.5rem;
+        height: 2.5rem;
+    }
+}
+
+@media only screen and (max-width: 500px) {
+    .Header>span {
+        font-size: 15px;
+    }
+}
+
+.Infos {
     display: flex;
     flex-direction: column;
-    padding: .8rem 1rem;
-    gap: .5rem;
+    padding: 0.8rem 1rem;
+    gap: 0.5rem;
 }
 
-.image{
+@media only screen and (max-width: 500px) {
+    .Infos {
+        padding: 0.6rem 0.8rem;
+        gap: 0.5rem;
+    }
+}
+
+.image {
     position: relative;
+    height: auto;
 }
 
-.rocket{
+.rocket {
     position: absolute;
 }
-.Post>div>img{
+
+.Post>div>img {
     width: 100%;
     /* max-height: 20rem; */
     object-fit: cover;
 }
 
-.postReact{
+.postReact {
     display: flex;
     align-items: flex-start;
     gap: 1.5rem;
@@ -68,36 +112,55 @@
      margin-bottom: 10px; */
 }
 
-.Details{
+.Details {
     margin-top: 10px;
 }
 
-.Comments>span{
+@media only screen and (max-width: 500px) {
+    .Details {
+        margin-top: 7px;
+    }
+}
+
+.Comments>span {
     font-size: 14px;
 }
 
-.line{
+@media only screen and (max-width: 500px) {
+    .Comments>span {
+        font-size: 13px;
+    }
+}
+
+.line {
     width: 100%;
 }
 
-.show-more{
+.show-more {
     font-size: 15px;
     cursor: pointer;
     color: rgb(192, 192, 192);
 }
 
-.show-more:hover{
+.show-more:hover {
     color: rgb(1, 175, 255);
 }
-.Details>span{
+
+.Details>span {
     font-size: 16px;
 }
 
-.Header-Comments{
+.Header-Comments {
     margin: 0;
 }
 
-.Send{
+@media only screen and (max-width: 500px) {
+    .Header-Comments {
+        font-size: 14px;
+    }
+}
+
+.Send {
     padding: 15px;
 }
 
@@ -107,6 +170,3 @@
     border-radius: 20px;
     color: var(--white);
 }
-
-
-

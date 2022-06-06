@@ -1,17 +1,26 @@
 import React, { useState, useRef } from "react";
-import ProfileImage from "../../img/profileImg.jpg";
 import "./PostShare.css";
 import { UilScenery } from "@iconscout/react-unicons";
 import { UilTimes } from "@iconscout/react-unicons";
 import { useMoralis } from "react-moralis";
+import Snackbar from '@mui/material/Snackbar';
+import MuiAlert from '@mui/material/Alert';
+import { LoadingOverlay } from '@mantine/core';
 
 const PostShare = () => {
   const [image, setImage] = useState(null);
-  const [file, setFile] = useState();
+  const [file, setFile] = useState(null);
   const [loading, setLoading] = useState(false);
   const [desc, setDesc] = useState("");
   const imageRef = useRef();
   const { Moralis } = useMoralis()
+  const [open, setOpen] = React.useState(false);
+  const user = Moralis.User.current()
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
 
   const create = async (e) => {
     e.preventDefault()
@@ -20,8 +29,11 @@ const PostShare = () => {
       const data = file
       const fileData = new Moralis.File(data.name, data)
       await fileData.saveIPFS()
-      const res = await Moralis.Cloud.run("createPost", { desc: desc, ipfsHash: fileData.ipfs() });
+      await Moralis.Cloud.run("createPost", { desc: desc, ipfsHash: fileData.ipfs() });
+      setOpen(true);
       setDesc("")
+      setFile(null)
+      setImage(null)
       setLoading(false)
     } else {
       alert("Select a photo first")
@@ -38,7 +50,8 @@ const PostShare = () => {
 
   return (
     <div className="PostShare">
-      <img src={ProfileImage} alt="" />
+      <LoadingOverlay className="loader-share" visible={loading} />
+      <img src={user.attributes.pfp} alt="" />
       <form onSubmit={(e) => create(e)}>
         <input type="text" required defaultValue={desc} onChange={e => setDesc(e.target.value)} placeholder="Share your thoughts..." />
         <div className="postOptions">
@@ -65,6 +78,11 @@ const PostShare = () => {
           </div>
         )}
       </form>
+      <Snackbar open={open} autoHideDuration={6000} onClose={handleClose} anchorOrigin={{ vertical: "top", horizontal: "right" }}>
+        <MuiAlert onClose={handleClose} severity="success" sx={{ width: '100%' }}>
+          Post successfully uploaded, go to your profile to check.
+        </MuiAlert>
+      </Snackbar>
     </div>
   );
 };
