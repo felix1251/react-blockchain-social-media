@@ -1,37 +1,26 @@
 import React, { useEffect, useState } from "react";
 import Cover from "../../img/cover.jpg";
 import "./ProfileCard.css";
-import { useMoralisCloudFunction, useMoralis } from "react-moralis";
+import { useMoralis } from "react-moralis";
 import { useParams } from "react-router-dom";
 
 const ProfileCard = ({ }) => {
   const { Moralis } = useMoralis()
   const { address } = useParams();
   const [user, setUser] = useState()
-  
-  const { fetch, isLoading } = useMoralisCloudFunction("getUser", { address: address }, { autoFetch: false });
 
   useEffect(() => {
     const load = async () => {
       if (address) {
-        fetch({
-          onSuccess: (data) => setUid(data[0]), // ratings should be 4.5
-        });
-      }
-      else {
-        setUser(Moralis.User.current().attributes)
-        const res = await Moralis.Cloud.run("getUser", { address: Moralis.User.current().attributes.ethAddress});
-        localStorage.setItem("lastViewdUserId", res[0].objectId) 
+        const res = await Moralis.Cloud.run("getUser", { adr: address });
+        setUser(res[0])
+      }else{
+        const res = await Moralis.Cloud.run("getUser", { adr: Moralis.User.current().attributes.ethAddress });
         setUser(res[0])
       }
     }
     load()
-  }, [fetch, address, Moralis])
-
-  const setUid = (data) => {
-    localStorage.setItem("lastViewdUserId", data.objectId) 
-    setUser(data)
-  }
+  }, [ address, Moralis])
 
   const ProfilePage = true;
   return (

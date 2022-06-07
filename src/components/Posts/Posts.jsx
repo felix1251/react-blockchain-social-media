@@ -1,12 +1,10 @@
-import React, { useState, useEffect, useRef } from 'react'
+import React from 'react'
 import './Posts.css'
 import Post from '../Post/Post'
 import { Loader } from '@mantine/core'
 import { Tabs } from '@mantine/core';
 import { ArrowsDownUp, Rocket, Users } from 'tabler-icons-react';
-
-const Posts = ({ view, posts }) => {
-
+const Posts = ({ view, posts, loading }) => {
   return (
     <div className="Posts">
       {view === "profile" &&
@@ -21,7 +19,6 @@ const Posts = ({ view, posts }) => {
       {posts.map((post, id) => {
         return <Post data={post} id={id} key={id} />
       })}
-      <div className='loader'><Loader /></div>
     </div>
   )
 }

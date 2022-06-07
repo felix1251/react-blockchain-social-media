@@ -8,11 +8,13 @@
   --hrColor: #cfcdcd;
   --cardColor: rgba(255, 255, 255, 0.64);
   --buttonBg: linear-gradient(to right, #ff9966, #ff5e62);
+  --buttonUnFlw: linear-gradient(to right, #ff0037, #fcac00);
   --post-button: linear-gradient(120deg, #d4fc79 0%, #96e6a1 100%);
   --inputColor: rgba(128, 127, 127, 0.329);
   --photo: #ffffff;
   --video: #4A4EB7;
-  --liked: #a6ff00;
+  --me: #a6ff00;
+  --liked: #8dd606;
   --location: #fc2600;
   --card-background: #1d1d1d;
   --main-background: #2b2b2b;
@@ -76,7 +78,7 @@ input{
   display: flex;
   align-items: center;
   justify-content: center;
-  color: white;
+  color: var(--white);
   border:none;
   border-radius: 0.5rem;
   background: var(--buttonBg);
@@ -84,16 +86,54 @@ input{
   font-weight: 700;
 }
 
-.post-button{
+.followed-button{
   display: flex;
   align-items: center;
   justify-content: center;
-  color: rgb(255, 255, 255);
+  color: white;
+  border:none;
+  border-radius: 0.5rem;
+  background: transparent;
+  border: 1px solid var(--white);
+  transition:all 100ms ease-out;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.followed-button:hover{
+  border: none;
+  background: var(--buttonUnFlw);;
+}
+
+@media only screen and (max-width: 500px) {
+  .followed-button:hover{
+    background: transparent;
+  }
+}
+
+
+.me-button{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgb(0, 0, 0);
   border:none;
   font-weight: 700;
   border-radius: 0.5rem;
-  background: var(--buttonBg);
-  transition:all 100ms ease-out;
+  background: var(--me);
+}
+
+.me-button:hover{
+  cursor: pointer;
+  color: var(--white);
+  background: transparent;
+  border: 2px solid var(--me);
+}
+
+@media only screen and (max-width: 500px) {
+  .me-button:hover{
+    background: transparent;
+  }
 }
 
 .button:hover{

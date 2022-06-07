@@ -9,7 +9,7 @@
 @media only screen and (max-width: 1200px) {
     .PostSide {
         margin-top: 10px;
-        margin-bottom: 0px;
+    
     }
 }
 
@@ -21,9 +21,19 @@
     }
 }
 
-.loader {
-    width: 100%;
+.loader-post {
     display: flex;
+    width: 100%;
+    border-radius: 15px;
     justify-content: center;
-    margin-top: 10px;
+    align-items: center;
+    background-color: var(--card-background);
+    border-top: 1px solid rgb(63, 63, 63);
+    border-bottom: 1px solid rgb(63, 63, 63);
+}
+
+@media only screen and (max-width: 500px) {
+    .loader-post{
+        border-radius: 0;
+    }
 }

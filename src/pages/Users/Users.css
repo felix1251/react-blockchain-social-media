@@ -1,0 +1,19 @@
+.Users {
+      position: relative;
+      display: grid;
+      grid-template-columns: 23rem auto 27rem;
+      gap: 1rem;
+}
+
+@media only screen and (max-width: 1600px) {
+      .Users {
+            grid-template-columns: auto 27rem;
+      }
+}
+
+@media only screen and (max-width: 1200px) {
+      .Users {
+            grid-template-columns: auto;
+            height: 100vh;
+      }
+}

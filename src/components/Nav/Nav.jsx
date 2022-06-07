@@ -16,9 +16,12 @@ const Nav = () => {
                   <Link to={`/u/${user.attributes.ethAddress}`}>
                         <UilUserCircle className="Icon" />
                   </Link>
+                  <Link to={"/p"}>
+                  <UilUsersAlt className="Icon"/>
+                  </Link>
                   <UilImagePlus className="Icon Hide-Show-Icon" onClick={() => setModalOpened(true)} />
                   <UilSearch className="Icon Hide-Show-Icon" />
-                  <UilUsersAlt className="Icon"/>
+                  
                   <UilBell className="Icon" />
                   <UilCommentAltDots className="Icon" />
                   <ShareModal modalOpened={modalOpened} setModalOpened={setModalOpened} />

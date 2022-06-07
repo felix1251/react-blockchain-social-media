@@ -1,0 +1,45 @@
+.user-list {
+      display: flex;
+      flex-direction: column;
+      gap: .6rem;
+      height: 96vh;
+      overflow: auto;
+}
+
+@media only screen and (max-width: 500px) {
+      .user-list {
+            gap: 0;
+            height: 100vh;
+      }
+
+}
+
+.loader-post {
+      display: flex;
+      width: 100%;
+      border-radius: 15px;
+      justify-content: center;
+      align-items: center;
+      background-color: var(--card-background);
+      border-top: 1px solid rgb(63, 63, 63);
+      border-bottom: 1px solid rgb(63, 63, 63);
+}
+
+@media only screen and (max-width: 500px) {
+      .loader-post {
+            border-radius: 0;
+      }
+}
+
+.userlist-loader{
+      height: 100px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+}
+
+@media only screen and (max-width: 500px) {
+      .userlist-loader {
+            height: 70px;
+      }
+}

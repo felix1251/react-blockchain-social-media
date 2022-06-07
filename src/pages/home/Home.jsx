@@ -9,14 +9,12 @@ const PostSide = lazy(() => import("../../components/PostSide/PostSide"));
 
 const Home = () => {
   const [posts, setPosts] = useState([]);
-  
+
   return (
     <div className="Home">
-      <Suspense fallback={<div>Loading...</div>}>
-        <RightSide />
-        <PostSide posts={posts} />
-        <ProfileSide />
-      </Suspense>
+      <RightSide />
+      <PostSide posts={posts} />
+      <ProfileSide />
     </div>
   );
 };

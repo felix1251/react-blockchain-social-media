@@ -1,0 +1,85 @@
+.user-card {
+      padding: 0.8rem 1.7rem;
+      display: flex;
+      flex-direction: row;
+      gap: 1.5rem;
+      align-items: center;
+      justify-content: space-between;
+      background-color: var(--card-background);
+      border-radius: 15px;
+}
+
+@media only screen and (max-width: 500px) {
+      .user-card {
+            border-top: 1px solid rgb(51, 51, 51);
+            padding: 0.8rem 1.1rem;
+            gap: 1rem;
+            border-radius: 0;
+      }
+}
+
+.user-image {
+      height: 5rem;
+      width: 5rem;
+      object-fit: cover;
+      border-radius: 50%;
+}
+
+@media only screen and (max-width: 500px) {
+      .user-image {
+            height: 3.5rem;
+            width: 3.5rem;
+      }
+}
+
+.user-details {
+      display: flex;
+      flex-direction: column;
+}
+
+.user-right {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+      gap: 1.5rem;
+}
+
+@media only screen and (max-width: 500px) {
+      .user-right {
+            gap: 1rem;
+      }
+}
+
+.user-details>span:nth-of-type(1) {
+      font-size: 22px;
+      font-weight: 600;
+}
+
+.user-details>span:nth-of-type(2) {
+      font-size: 18px;
+      font-weight: 400;
+      color: rgb(194, 194, 194);
+}
+
+@media only screen and (max-width: 500px) {
+      .user-details>span:nth-of-type(1){
+            font-size: 19px;
+            font-weight: 600;
+      }
+      .user-details>span:nth-of-type(2) {
+            font-size: 15px;
+            font-weight: 400;
+      }
+}
+.button-sizing {
+      width: 150px;
+      padding: 20px 0;
+}
+
+@media only screen and (max-width: 500px) {
+      .button-sizing {
+            width: 100px;
+            padding: 18px 0;
+      }
+}
