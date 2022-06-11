@@ -26,11 +26,10 @@ const PostSide = () => {
       setHasMore(true)
       setPage(page + 1)
       setPosts(posts.concat(res))
-      setLoading(false)
     } else {
-      setLoading(false)
       setHasMore(false)
     }
+    setLoading(false)
   }
 
   const onBottomFetch = () => {
@@ -43,26 +42,28 @@ const PostSide = () => {
     const load = async () => {
       setLoading(true)
       const res = await Moralis.Cloud.run("feedPosts", { page: 0 })
-      if(res.length > 0){
+      if (res.length > 0) {
         setHasMore(true)
         setPage(1)
         setPosts(res)
-        setLoading(false)
       }
+      setLoading(false)
     }
     load()
   }, [Moralis])
 
   return (
-    <div ref={scrollRef} className={`PostSide`}>
-      <PostShare />
-      <Posts posts={posts} loading={loading} view="feed" />
-      {<div className={'loader-post'}>
-        <div style={{height: "55px", display: "flex", justifyContent: "center", alignItems: "center"}}>
-          {!hasMore && !loading && <span>Nothing to load</span>}
-          {loading && <Loader color={"lime"} size="xl" variant="dots" />}
-        </div>
-      </div>}
+    <div>
+      <div ref={scrollRef} className={`PostSide`}>
+        <PostShare className="post-share"/>
+        <Posts posts={posts} loading={loading} view="feed" />
+        {<div className={'loader-post'}>
+          <div className='loader-container'>
+            {!hasMore && !loading && <span>Nothing to load</span>}
+            {loading && <Loader color={"lime"} size="xl" variant="dots" />}
+          </div>
+        </div>}
+      </div>
     </div>
   )
 }

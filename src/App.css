@@ -38,6 +38,13 @@ body{
   background: var(--main-background);
 }
 
+
+@media only screen and (max-width: 500px) {
+  body {
+    background: var(--card-background);
+  }
+}
+
 .App{
   overflow: hidden;
   color: var(--white);
@@ -51,15 +58,21 @@ body{
 
 @media only screen and (max-width: 1200px) {
   .App {
-    padding: 0rem 1rem;
+    padding: 0rem ;
+  }
+}
+
+/* @media only screen and (max-width: 1200px) {
+  .App {
+    margin-bottom: 50px;
   }
 }
 
 @media only screen and (max-width: 500px) {
   .App {
-    padding: 0rem;
+    margin-bottom: 60px;
   }
-}
+} */
 
 .blur{
   position: absolute;

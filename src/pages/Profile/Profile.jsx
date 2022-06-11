@@ -75,7 +75,7 @@ const Profile = () => {
           {isParamsEqualToAccount() && <PostShare />}
           <Posts posts={posts} loading={loading} view="profile" />
           {<div className={'loader-post'}>
-            <div style={{ height: "55px", display: "flex", justifyContent: "center", alignItems: "center" }}>
+            <div className='loader-container'>
               {!hasMore && !loading && <span>Nothing to load</span>}
               {loading && <Loader color={"lime"} size="xl" variant="dots" />}
             </div>

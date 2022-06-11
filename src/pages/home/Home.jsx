@@ -1,5 +1,4 @@
-import React, { lazy, Suspense, useEffect, useState } from "react";
-import { useMoralis } from "react-moralis";
+import React, { lazy, useState } from "react";
 import "./Home.css";
 const ProfileSide = lazy(() =>
   import("../../components/profileSide/ProfileSide")
@@ -14,7 +13,7 @@ const Home = () => {
     <div className="Home">
       <RightSide />
       <PostSide posts={posts} />
-      <ProfileSide />
+      <ProfileSide inHome={true}/>
     </div>
   );
 };

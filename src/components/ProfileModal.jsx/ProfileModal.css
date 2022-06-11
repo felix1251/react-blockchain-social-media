@@ -10,6 +10,18 @@
       color: var(--white);
 }
 
+.update-profile{
+      display: flex;
+      flex-direction: row;
+}
+
+.update-image-preview>img{
+      width: 5rem;
+      height:5rem;
+      border-radius: 50%;
+      object-fit: cover;
+}
+
 @media only screen and (max-width: 1600px) {
       .Profile-Modal{
             width: 80%;  

@@ -1,9 +1,21 @@
-import React, { useEffect } from "react";
+import React from "react";
 import "./Auth.css";
 import Logo from "../../img/logo.png";
+import { useMoralis } from "react-moralis";
+import { Loader, LoadingOverlay } from "@mantine/core";
+
+const load = () => {
+  return <div style={{display: "flex", flexDirection: "column", alignItems: "center", gap: "1rem"}}>
+    <Loader color="orange" size="xl" variant="bars" />
+    <span style={{fontWeight: "600"}}>Initializing...</span>
+  </div>
+}
+
 const Auth = () => {
+  const { isAuthenticating } = useMoralis()
   return (
     <div className="Auth">
+      <LoadingOverlay overlayColor="rgba(0, 0, 0, 0.4)" loader={load()} radius="lg" visible={isAuthenticating} />
       <div className="a-left">
         <img src={Logo} alt="" />
         <div className="Webname">

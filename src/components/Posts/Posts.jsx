@@ -1,7 +1,6 @@
 import React from 'react'
 import './Posts.css'
 import Post from '../Post/Post'
-import { Loader } from '@mantine/core'
 import { Tabs } from '@mantine/core';
 import { ArrowsDownUp, Rocket, Users } from 'tabler-icons-react';
 const Posts = ({ view, posts, loading }) => {

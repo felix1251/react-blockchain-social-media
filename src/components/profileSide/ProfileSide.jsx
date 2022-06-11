@@ -6,12 +6,16 @@ import "./ProfileSide.css";
 // import ConnectButtonProvider from "../ConnectMoralis/ConnectButton";
 // import { useMoralis } from "react-moralis";
 // import ConnectButtonProvider from "../ConnectMoralis/ConnectButton";
-const ProfileSide = () => {
+const ProfileSide = ({ inHome }) => {
   return (
     <div className="ProfileSide">
-      <Nav/>
-      <ProfileCard />
-      <FollowersCard />
+      <Nav />
+      {inHome &&
+        <>
+          <ProfileCard inHome={true}/>
+          <FollowersCard />
+        </>
+      }
     </div>
   );
 };

@@ -9,7 +9,6 @@
 @media only screen and (max-width: 1200px) {
     .PostSide {
         margin-top: 10px;
-    
     }
 }
 
@@ -17,7 +16,7 @@
     .PostSide {
         margin-top: 0px;
         gap: 0rem;
-        height: 100vh;
+        height: 93vh;
     }
 }
 
@@ -32,8 +31,33 @@
     border-bottom: 1px solid rgb(63, 63, 63);
 }
 
+.loader-container{
+    height: 55px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+@media only screen and (max-width: 500px) {
+    .loader-container {
+        height: 40px;
+    }
+}
+
+
 @media only screen and (max-width: 500px) {
     .loader-post{
         border-radius: 0;
     }
 }
+
+.mobile-height {
+    height: 61px;
+}
+
+@media only screen and (max-width: 500px) {
+    .mobile-height {
+        height: 60px;
+    }
+}
+

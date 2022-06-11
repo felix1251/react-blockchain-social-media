@@ -10,7 +10,7 @@ const UserCard = ({ username, ethAddress, followers, pfp, isMe, isFollowed, user
   const { Moralis } = useMoralis()
   const followUser = async () => {
     if(isMe){
-      alert("You can't like you own")
+      alert("This is you")
     }else {
       setFollowed(!followed)
       const res = await Moralis.Cloud.run("followUser", { userId: userId });
@@ -27,7 +27,7 @@ const UserCard = ({ username, ethAddress, followers, pfp, isMe, isFollowed, user
       <div className='user-right'>
         <LazyLoadImage className='user-image' src={pfp} alt="" />
         <div className='user-details'>
-          <span>{username}</span>
+          <span>{username.slice(0, 25)}{username.length > 25 && "...."}</span>
           <span> {followerCount} followers</span>
         </div>
       </div>

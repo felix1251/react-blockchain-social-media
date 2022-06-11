@@ -67,11 +67,18 @@ const Post = ({ data, last }) => {
         </div>
         <span style={{ color: "var(--white)", fontSize: '14px' }}>{likeCount} rocket likes</span>
         {data.comments.lazy_data.length > 0 && <><hr className='line' />
-          <h4 className='Header-Comments'>Comments</h4>
+          <div className="user-followed-list">
+            {data.comments.lazy_data.map((comm, key) => (
+              <span key={key} className='Header-Comments-list'>{!comm.isMe ? comm.commenterData.username : "You"}{data.comments.lazy_data.length > 1 && ", "}</span>
+            ))}
+            {data.comments.isMore && <span className='Header-Comments-list'> and more</span>}
+            <span className='Header-Comments-list'> commented this post</span>
+          </div>
           {data.comments.lazy_data.map((comm, key) => (
             <div key={key} className="Comments">
               <span><b>{comm.commenterData.username}</b></span>{" "}
-              <span>{comm.comment.slice(0, 40)}{comm.comment.length >= 40 && ".... show more"}</span>
+              <span>{comm.comment.slice(0, 40)}{comm.comment.length >= 40 && ".... show more"}</span>{" "}
+              {comm.isMe && <span>(You)</span>}
             </div>
           ))}
           {commentCount > 3 && <span className='show-more'>show more comments...</span>}
@@ -100,3 +107,5 @@ const Post = ({ data, last }) => {
 }
 
 export default Post
+
+

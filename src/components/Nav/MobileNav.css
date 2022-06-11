@@ -1,0 +1,56 @@
+.Mobile-Icon{
+      cursor: pointer;
+      color: var(--white);
+      width: 2rem;
+      height: 2rem;
+}
+
+.Mobile-Icon:hover{
+      cursor: pointer;
+      color: var(--shedule);
+      background: transparent;
+}
+
+.Mobile-navIcons{
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 20px;
+      background-color: var(--card-background);
+      height: 60px;
+      position: fixed;
+      bottom: 5px;
+      border-top: 1px solid rgb(63, 63, 63);
+      left: 0;
+      z-index: 99999;
+      width: 100%;
+}
+
+.Icon-List{
+      display: flex;
+      justify-content: space-between;
+      width: 100%;
+      padding: 0 30px;
+}
+
+@media only screen and (max-width: 500px) {
+      .Mobile-navIcons{
+            bottom: 0;
+            border-radius: 0;
+      }
+      .Icon-List{
+            padding: 0 20px;
+      }
+      .Mobile-Icon:hover{
+            cursor: pointer;
+            color: var(--white);
+            background: transparent;
+      }
+}
+
+@media only screen and (min-width: 1200px) {
+      .Mobile-navIcons{
+            display: none;
+      }
+}
+
