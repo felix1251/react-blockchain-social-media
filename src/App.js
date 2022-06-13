@@ -13,11 +13,12 @@ import { LazyLoadImage } from 'react-lazy-load-image-component';
 import { lazy, Suspense} from "react";
 import { Loader } from "@mantine/core";
 
-const Auth = lazy(() => import("./pages/Auth/Auth"))
+const Post = lazy(() => import("./pages/Post/Post.jsx"))
+const Auth = lazy(() => import("./pages/Auth/Auth.jsx"))
 const User = lazy(() => import("./pages/Users/Users.jsx"))
-const Home = lazy(() => import("./pages/home/Home"))
-const Profile = lazy(() => import("./pages/Profile/Profile"))
-const MobileNav = lazy(() => import("./components/Nav/MobileNav"))
+const Home = lazy(() => import("./pages/home/Home.jsx"))
+const Profile = lazy(() => import("./pages/Profile/Profile.jsx"))
+const MobileNav = lazy(() => import("./components/Nav/MobileNav.jsx"))
 
 const loader = () => {
   return (
@@ -42,6 +43,7 @@ function App() {
               <Route path="/h" element={<Home />} />
               <Route path="/u/:address" element={<Profile />} />
               <Route path="/p" element={<User />} />
+              <Route path="/t" element={<Post />} />
             </Route>
             {isAuthenticated &&
               <Route path="/auth" element={<Auth />} />

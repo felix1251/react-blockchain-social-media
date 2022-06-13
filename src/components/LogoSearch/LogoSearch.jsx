@@ -6,7 +6,7 @@ const LogoSearch = () => {
         <div className="LogoSearch">
             <div className="Search">
                 <input type="text" placeholder="#Explore" />
-                <div className="s-icon">
+                <div className="logo-icon">
                     <UilSearch />
                 </div>
             </div>

@@ -28,6 +28,10 @@
     color: white;
 }
 
+.logo-icon{
+    cursor: pointer;
+}
+
 .s-icon:hover{
     cursor: pointer;
 }

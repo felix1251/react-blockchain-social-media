@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./RightSide.css";
 import LogoSearch from "../LogoSearch/LogoSearch";
-import TrendCard from "../TrendCard/TrendCard";
+// import TrendCard from "../TrendCard/TrendCard";
 import ShareModal from "../ShareModal/ShareModal";
 
 const RightSide = () => {
@@ -9,7 +9,7 @@ const RightSide = () => {
   return (
     <div className="RightSide">
       <LogoSearch />
-      <TrendCard />
+      {/* <TrendCard /> */}
       <button className="button r-button" onClick={() => setModalOpened(true)}>
         Create Post
       </button>

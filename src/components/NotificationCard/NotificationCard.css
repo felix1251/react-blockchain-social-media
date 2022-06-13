@@ -11,6 +11,36 @@
       cursor: pointer;
 }
 
+.class-type-1{
+      font-size: 15px;
+      color: #ff5e62;
+}
+.class-type-2{
+      font-size: 15px;
+      color: lime;
+}
+
+.class-type-3{
+      font-size: 15px;
+      color: rgb(92, 162, 255)
+}
+
+@media only screen and (max-width: 1600px) {
+      .class-type-1{
+            font-size: 13px;
+      }
+      .class-type-2{
+            font-size: 13px;
+      }
+      
+      .class-type-3{
+            font-size: 13px;
+      }
+      
+}
+
+
+
 .card-view{
       display: flex;
       justify-content: center;

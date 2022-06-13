@@ -1,7 +1,7 @@
 import { Loader } from '@mantine/core'
 import React, { useEffect, useState } from 'react'
 import { useBottomScrollListener } from 'react-bottom-scroll-listener'
-import { useMoralis, useMoralisCloudFunction } from 'react-moralis'
+import { useMoralis } from 'react-moralis'
 import { useParams } from 'react-router-dom'
 import Posts from '../../components/Posts/Posts'
 import PostShare from '../../components/PostShare/PostShare'

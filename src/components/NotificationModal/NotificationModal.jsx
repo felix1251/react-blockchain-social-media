@@ -39,7 +39,7 @@ const NotificationModal = (props) => {
                   >
                         <ScrollArea viewportRef={scrollRef} style={{ height: notifHeight }} scrollbarSize={19}>
                               {data?.map((notif, key) => {
-                                    return <NotificationCard key={key} username={notif.username} pfp={notif.pfp} type={notif.type} classId={notif.classId} />
+                                    return <NotificationCard key={key} ethAddress={notif.ethAddress} setNotifOpen={setNotifOpen} userId={notif.userId} username={notif.username} pfp={notif.pfp} type={notif.type} classId={notif.classId} />
                               })}
                               {<div className={'loader-post'}>
                                     <div className='loader-container'>

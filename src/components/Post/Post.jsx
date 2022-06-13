@@ -7,14 +7,16 @@ import { ActionIcon, Input, Indicator } from '@mantine/core';
 import { useMoralis } from "react-moralis";
 import moment from 'moment'
 import { LazyLoadImage } from 'react-lazy-load-image-component';
+import CommentsModal from '../CommentsModal/CommentsModal'
 
-const Post = ({ data, last }) => {
+const Post = ({ data }) => {
   const { Moralis } = useMoralis()
   const [like, setLiked] = useState(data?.likedByMe)
   const [likeCount, setLikeCount] = useState(data?.likes?.metadata?.total)
   const [commentCount, setCommentCount] = useState(data?.comments?.metadata?.total)
   const [comment, setComment] = useState("")
   const [loading, setLoading] = useState(false)
+  const [opened, setOpened] = useState(false)
 
   const createComment = async (e) => {
     e.preventDefault()
@@ -43,7 +45,7 @@ const Post = ({ data, last }) => {
   }
 
   return (
-    <div className="Post" ref={last}>
+    <div className="Post" >
       <div className="Header">
         <Link to={`/u/${data?.ownerData.ethAddress}`}>
           <LazyLoadImage className='Header-Image' src={data?.ownerData.pfp} alt="" />
@@ -57,7 +59,7 @@ const Post = ({ data, last }) => {
         <div className="postReact">
           {like ? <UisRocket onClick={e => likePost(e)} className="Post-Icon-Liked" /> : <UilRocket className="Post-Icon" onClick={e => likePost(e)} />}
           <Indicator inline label={commentCount} size={17} color="red" offset={5} position="bottom-end" disabled={commentCount > 0 ? false : true}>
-            <UilCommentDots className="Post-Icon" />
+            <UilCommentDots className="Post-Icon" onClick={()=>setOpened(true)} />
           </Indicator>
           <UilShare className="Post-Icon" />
         </div>
@@ -81,12 +83,11 @@ const Post = ({ data, last }) => {
               {comm.isMe && <span>(You)</span>}
             </div>
           ))}
-          {commentCount > 3 && <span className='show-more'>show more comments...</span>}
+          {data && <span className='show-more'>show more comments...</span>}
         </>
         }
         <div style={{ color: "grey", fontSize: '13.5px', marginTop: "5px" }}>Posted {moment(data?.createdAt).fromNow()}</div>
       </div>
-
       <form className='Send'>
         <Input
           placeholder="Send comment...."
@@ -102,6 +103,7 @@ const Post = ({ data, last }) => {
           }
         />
       </form>
+      <CommentsModal opened={opened} setOpened={setOpened}/>
     </div>
   )
 }

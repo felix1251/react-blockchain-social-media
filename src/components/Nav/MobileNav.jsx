@@ -7,11 +7,13 @@ import ShareModal from "../ShareModal/ShareModal";
 import { useMoralis } from "react-moralis";
 import { Indicator } from "@mantine/core";
 import NotificationModal from "../NotificationModal/NotificationModal.jsx";
+import MobileProfileNav from "../MobileProfileNav/MobileProfileNav";
 
 const MobileNav = () => {
       const [modalOpened, setModalOpened] = useState(false);
       const { user, Moralis } = useMoralis()
       const [notifOpen, setNotifOpen] = useState(false);
+      const [profileOpen, setProfileOpen] = useState(false)
       const [data, setData] = useState([])
       const [loading, setLoading] = useState(false)
       const [page, setPage] = useState(0)
@@ -19,9 +21,9 @@ const MobileNav = () => {
 
       const openNotif = () => {
             setNotifOpen(!notifOpen)
-            setPage(0) 
+            setPage(0)
             setData([])
-            if(!notifOpen) notifFetch()
+            if (!notifOpen) notifFetch()
       }
 
       const notifFetch = async () => {
@@ -31,7 +33,7 @@ const MobileNav = () => {
                   setHasMore(true)
                   setPage(page + 1)
                   setData(data.concat(res))
-            }else{
+            } else {
                   setHasMore(false)
             }
             setLoading(false)
@@ -52,15 +54,14 @@ const MobileNav = () => {
                               <Indicator inline label={user.attributes.unReadNotif} size={17} color="red" offset={5} position="top-end">
                                     <UilBell className="Mobile-Icon" onClick={() => openNotif()} />
                               </Indicator>
-                              <Link to={`/u/${user.attributes.ethAddress}`}>
-                                    <UilUserCircle className="Mobile-Icon" />
-                              </Link>
-
+                              <UilUserCircle className="Mobile-Icon" onClick={()=> setProfileOpen(!profileOpen)}/>
+                              
                         </div>
                   </div>
                   <ShareModal modalOpened={modalOpened} setModalOpened={setModalOpened} />
+                  <MobileProfileNav setProfileOpen={setProfileOpen} profileOpen={profileOpen} />
                   <NotificationModal notifOpen={notifOpen} setNotifOpen={openNotif} notifFetch={notifFetch} hasMore={hasMore}
-                  loading={loading} position={"bottom"} size={"lg"} padding={"sm"} data={data} notifHeight={245} />
+                        loading={loading} position={"bottom"} size={"lg"} padding={"sm"} data={data} notifHeight={245} />
             </>
 
       );

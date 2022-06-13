@@ -70,9 +70,7 @@ function ProfileModal({ modalOpened, setModalOpened }) {
 
   return (
     <Modal
-      overlayColor={
-        theme.colors.dark[9]
-      }
+      overlayColor={theme.colors.dark[9]}
       overlayOpacity={0.55}
       overlayBlur={3}
       classNames={{ modal: 'Profile-Modal' }}
