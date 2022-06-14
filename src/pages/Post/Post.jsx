@@ -30,7 +30,7 @@ const Post = () => {
             <div className='post-page'>
                   <RightSide />
                   {postData ? <SinglePost data={postData}/> : <div>fetching...</div>}
-                  <Comments comments={comments} postId={id}/>
+                  <Comments comments={comments} postId={id} loading={loading}/>
             </div>
       )
 }

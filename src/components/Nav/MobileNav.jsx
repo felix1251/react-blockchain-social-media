@@ -61,7 +61,7 @@ const MobileNav = () => {
                   <ShareModal modalOpened={modalOpened} setModalOpened={setModalOpened} />
                   <MobileProfileNav setProfileOpen={setProfileOpen} profileOpen={profileOpen} />
                   <NotificationModal notifOpen={notifOpen} setNotifOpen={openNotif} notifFetch={notifFetch} hasMore={hasMore}
-                        loading={loading} position={"bottom"} size={"lg"} padding={"sm"} data={data} notifHeight={245} />
+                  loading={loading} position={"bottom"} size={"lg"} padding={"sm"} data={data} notifHeight={245} />
             </>
 
       );

@@ -1,13 +1,15 @@
 import React, { useState } from 'react'
 import './Post.css'
 import { Link } from 'react-router-dom'
-import { UilCommentDots, UilShare, UilRocket, UilMessage } from '@iconscout/react-unicons'
+import { UilCommentDots, UilShare, UilRocket, UilMessage, UilGripHorizontalLine } from '@iconscout/react-unicons'
 import { UisRocket } from '@iconscout/react-unicons-solid'
-import { ActionIcon, Input, Indicator } from '@mantine/core';
+import { ActionIcon, Input, Indicator, Popover } from '@mantine/core';
 import { useMoralis } from "react-moralis";
 import moment from 'moment'
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import CommentsModal from '../CommentsModal/CommentsModal'
+import { Button } from '@mantine/core';
+
 
 const Post = ({ data }) => {
   const { Moralis } = useMoralis()
@@ -15,8 +17,11 @@ const Post = ({ data }) => {
   const [likeCount, setLikeCount] = useState(data?.likes?.metadata?.total)
   const [commentCount, setCommentCount] = useState(data?.comments?.metadata?.total)
   const [comment, setComment] = useState("")
+  const [modalComment, setModalComment] = useState([])
+  const [modalCommentLoading, setModalCommentLoading] = useState(false)
   const [loading, setLoading] = useState(false)
   const [opened, setOpened] = useState(false)
+  const [visible, setVisible] = useState(false);
 
   const createComment = async (e) => {
     e.preventDefault()
@@ -44,13 +49,40 @@ const Post = ({ data }) => {
     setLoading(false)
   }
 
+  const getModalComments = async () => {
+    setOpened(true)
+    setModalCommentLoading(true)
+    const comm = await Moralis.Cloud.run("postComments", { postId: data.objectId })
+    setModalComment(modalComment.concat(comm))
+    setModalCommentLoading(false)
+  }
+
   return (
     <div className="Post" >
       <div className="Header">
-        <Link to={`/u/${data?.ownerData.ethAddress}`}>
-          <LazyLoadImage className='Header-Image' src={data?.ownerData.pfp} alt="" />
-        </Link>
-        <span><b>{data?.ownerData.username}</b></span>
+        <div className='header-info-fix'>
+          <Link to={`/u/${data?.ownerData.ethAddress}`}>
+            <LazyLoadImage className='Header-Image' src={data?.ownerData.pfp} alt="" />
+          </Link>
+          <span><b>{data?.ownerData.username}</b></span>
+        </div>
+        <div className="dots">
+          <Popover
+            opened={visible}
+            onClose={() => setVisible(false)}
+            target={<UilGripHorizontalLine onClick={() => setVisible(true)} />}
+            position="bottom"
+          >
+            <div style={{ display: 'flex', flexDirection: "column", gap: ".5rem"}}>
+              <Button color="lime">
+                View
+              </Button>
+              <Button color="red">
+                Delete
+              </Button>
+            </div>
+          </Popover>
+        </div>
       </div>
       <div className='image'>
         <LazyLoadImage src={data?.postImage} alt={data?.postImage} />
@@ -59,7 +91,7 @@ const Post = ({ data }) => {
         <div className="postReact">
           {like ? <UisRocket onClick={e => likePost(e)} className="Post-Icon-Liked" /> : <UilRocket className="Post-Icon" onClick={e => likePost(e)} />}
           <Indicator inline label={commentCount} size={17} color="red" offset={5} position="bottom-end" disabled={commentCount > 0 ? false : true}>
-            <UilCommentDots className="Post-Icon" onClick={()=>setOpened(true)} />
+            <UilCommentDots className="Post-Icon" onClick={() => getModalComments()} />
           </Indicator>
           <UilShare className="Post-Icon" />
         </div>
@@ -103,7 +135,7 @@ const Post = ({ data }) => {
           }
         />
       </form>
-      <CommentsModal opened={opened} setOpened={setOpened}/>
+      <CommentsModal opened={opened} modalCommentLoading={modalCommentLoading} setOpened={setOpened} postId={data.objectId} modalComment={modalComment} />
     </div>
   )
 }

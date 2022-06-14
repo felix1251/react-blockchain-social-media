@@ -37,10 +37,24 @@
     }
 }
 
+.mantine-tzt201 {
+    padding: 8px;
+}
+
+.dots{
+    cursor: pointer;
+}
+
+.header-info-fix{
+    display: flex;
+    gap: .7rem;
+    align-items: center;
+}
+
 .Header {
     padding: 0.8rem 0.9rem;
     display: flex;
-    flex-direction: row;
+    justify-content: space-between;
     gap: 1rem;
     align-items: center;
 }
@@ -58,8 +72,8 @@
     height: 3rem;
 }
 
-.Header>span {
-    font-size: 16px;
+.Header>div>span {
+    font-size: 17px;
 }
 
 @media only screen and (max-width: 500px) {
@@ -70,8 +84,8 @@
 }
 
 @media only screen and (max-width: 500px) {
-    .Header>span {
-        font-size: 15px;
+    .Header>div>span {
+        font-size: 16px;
     }
 }
 
@@ -119,6 +133,7 @@
 @media only screen and (max-width: 500px) {
     .Details {
         margin-top: 7px;
+        font-size: 16px;
     }
 }
 

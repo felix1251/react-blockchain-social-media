@@ -1,6 +1,7 @@
-import React from 'react'
-import { useState } from 'react';
-import { Drawer } from '@mantine/core';
+import React, { useEffect } from 'react'
+// import { useState } from 'react';
+import { Drawer, ScrollArea } from '@mantine/core';
+// import { useMoralis } from 'react-moralis';
 
 const CommentsModal = (props) => {
       const { setOpened, opened } = props
@@ -17,11 +18,17 @@ const CommentsModal = (props) => {
                               drawer: {
                                     color: 'var(--white)', backgroundColor: "var(--card-background)", fontSize: "18px"
                               },
-                              closeButton: { display: "none" },
+                              closeButton: { color: "var(--white)" },
                               title: { fontWeight: 800, fontSize: "20px" },
                         }}
                   >
-                        
+                        <ScrollArea
+                              style={{ height: "60vh" }}
+                        >
+                              <div style={{ width: "100%" }}>
+                                    hi
+                              </div>
+                        </ScrollArea>
                   </Drawer>
             </div>
       )
