@@ -72,7 +72,7 @@ const Profile = () => {
       <div className="Profile-center" ref={scrollRef}>
         <ProfileCard />
         <div className="Profile-post">
-          {isParamsEqualToAccount() && <PostShare />}
+          {/* {isParamsEqualToAccount() && <PostShare />} */}
           <Posts posts={posts} loading={loading} view="profile" />
           {<div className={'loader-post'}>
             <div className='loader-container'>

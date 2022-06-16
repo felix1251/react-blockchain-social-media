@@ -3,13 +3,18 @@ import './Post.css'
 import { Link } from 'react-router-dom'
 import { UilCommentDots, UilShare, UilRocket, UilMessage, UilGripHorizontalLine } from '@iconscout/react-unicons'
 import { UisRocket } from '@iconscout/react-unicons-solid'
-import { ActionIcon, Input, Indicator, Popover } from '@mantine/core';
+import { ActionIcon, Input, Indicator, Popover, Loader } from '@mantine/core';
 import { useMoralis } from "react-moralis";
 import moment from 'moment'
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import CommentsModal from '../CommentsModal/CommentsModal'
 import { Button } from '@mantine/core';
+import { useBottomScrollListener } from 'react-bottom-scroll-listener'
 
+const option = {
+  offset: 0,
+  debounce: 0,
+}
 
 const Post = ({ data }) => {
   const { Moralis } = useMoralis()
@@ -18,22 +23,26 @@ const Post = ({ data }) => {
   const [commentCount, setCommentCount] = useState(data?.comments?.metadata?.total)
   const [comment, setComment] = useState("")
   const [modalComment, setModalComment] = useState([])
-  const [modalCommentLoading, setModalCommentLoading] = useState(false)
   const [loading, setLoading] = useState(false)
   const [opened, setOpened] = useState(false)
   const [visible, setVisible] = useState(false);
+  const [sendCommentLoading, setSendCommentLoading] = useState(false);
+  //lazy load
+  const [commentPage, setCommentPage] = useState(0);
+  const [commentHasMore, setCommentHasMore] = useState(false)
+  const [modalCommentLoading, setModalCommentLoading] = useState(false)
 
   const createComment = async (e) => {
     e.preventDefault()
+    setSendCommentLoading(true)
     if (comment) {
       const res = await Moralis.Cloud.run("createComment", { postId: data.objectId, comment: comment });
       setCommentCount(commentCount + 1)
       setComment("")
-      setLoading(true)
     } else {
       alert("Comment must not empty, type something firts!")
     }
-    setLoading(false)
+    setSendCommentLoading(false)
   }
 
   const likePost = async (e) => {
@@ -49,12 +58,33 @@ const Post = ({ data }) => {
     setLoading(false)
   }
 
-  const getModalComments = async () => {
-    setOpened(true)
+  const fetchModalComments = async () => {
+    if (modalComment.length === 0) {
+      setOpened(true)
+    }
     setModalCommentLoading(true)
-    const comm = await Moralis.Cloud.run("postComments", { postId: data.objectId })
-    setModalComment(modalComment.concat(comm))
+    const comm = await Moralis.Cloud.run("postComments", { postId: data.objectId, page: commentPage })
+    if (comm.length > 0) {
+      setCommentHasMore(true)
+      setCommentPage(commentPage + 1)
+      setModalComment(modalComment.concat(comm))
+    } else {
+      setCommentHasMore(false)
+    }
     setModalCommentLoading(false)
+  }
+
+  const onBottomFetch = () => {
+    if (!modalCommentLoading) fetchModalComments()
+  }
+
+  const scrollRef = useBottomScrollListener(onBottomFetch, option);
+
+  const closeCommentModal = () => {
+    setModalComment([])
+    setOpened(false)
+    setCommentPage(0)
+    setCommentHasMore(false)
   }
 
   return (
@@ -73,8 +103,8 @@ const Post = ({ data }) => {
             target={<UilGripHorizontalLine onClick={() => setVisible(true)} />}
             position="bottom"
           >
-            <div style={{ display: 'flex', flexDirection: "column", gap: ".5rem"}}>
-              <Button color="lime">
+            <div style={{ display: 'flex', flexDirection: "column", gap: ".5rem" }}>
+              <Button color="lime" component={Link} to={`/t/${data.objectId}`}>
                 View
               </Button>
               <Button color="red">
@@ -91,7 +121,7 @@ const Post = ({ data }) => {
         <div className="postReact">
           {like ? <UisRocket onClick={e => likePost(e)} className="Post-Icon-Liked" /> : <UilRocket className="Post-Icon" onClick={e => likePost(e)} />}
           <Indicator inline label={commentCount} size={17} color="red" offset={5} position="bottom-end" disabled={commentCount > 0 ? false : true}>
-            <UilCommentDots className="Post-Icon" onClick={() => getModalComments()} />
+            <UilCommentDots className="Post-Icon" onClick={() => fetchModalComments()} />
           </Indicator>
           <UilShare className="Post-Icon" />
         </div>
@@ -115,7 +145,7 @@ const Post = ({ data }) => {
               {comm.isMe && <span>(You)</span>}
             </div>
           ))}
-          {data && <span className='show-more'>show more comments...</span>}
+          {data && <span className='show-more' onClick={() => fetchModalComments()}>show more comments...</span>}
         </>
         }
         <div style={{ color: "grey", fontSize: '13.5px', marginTop: "5px" }}>Posted {moment(data?.createdAt).fromNow()}</div>
@@ -130,12 +160,18 @@ const Post = ({ data }) => {
           onChange={(e) => setComment(e.currentTarget.value)}
           rightSection={
             <ActionIcon radius="lg" size="xl" variant="transparent">
-              <UilMessage className="Post-Icon" onClick={(e) => createComment(e)} />
+              {!sendCommentLoading ?
+                <UilMessage className="Post-Icon" onClick={(e) => createComment(e)} />
+                :
+                <Loader size={"sm"} />
+              }
             </ActionIcon>
           }
         />
       </form>
-      <CommentsModal opened={opened} modalCommentLoading={modalCommentLoading} setOpened={setOpened} postId={data.objectId} modalComment={modalComment} />
+      <CommentsModal opened={opened} modalCommentLoading={modalCommentLoading}
+        closeCommentModal={closeCommentModal} postId={data.objectId} modalComment={modalComment}
+        hasMore={commentHasMore} scrollRef={scrollRef} />
     </div>
   )
 }

@@ -39,7 +39,7 @@ const ProfileCard = ({ inHome }) => {
   return (
     <div className="ProfileCard">
       <div className={`ProfileImages ${inHome && "in-home"} `}>
-        <img src={Cover} alt="" />
+        <img src={user ? user?.cover: logo} alt="" />
         <img src={user ? user?.pfp : logo} alt="" />
       </div>
       <div className="ProfileName">

@@ -1,12 +1,59 @@
-.comments-scroll{
+.comments-scroll {
       display: flex;
-      margin-top: 45px;
-      gap: .5rem;
+      gap: .4rem;
       flex-direction: column;
 }
 
-@media only screen and (max-width: 1200px) {
-      .comments-scroll{
-            display: none;
-      }   
+.on-single-post {
+      margin-top: 45px;
+}
+
+.single-page-background {
+      background-color: var(--card-background);
+}
+
+.feed-page-background {
+      background-color: rgb(22, 22, 22);
+}
+
+.loader-post {
+      display: flex;
+      width: 100%;
+      border-radius: 15px;
+      justify-content: center;
+      align-items: center;
+      background-color: var(--card-background);
+}
+
+.loader-container {
+      height: 55px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+}
+
+@media only screen and (max-width: 500px) {
+      .loader-container {
+            height: 40px;
+      }
+}
+
+/* .comments-page{
+      height: 65vh;
+      padding: 12px;
+      border-radius: 15px;
+}
+
+@media only screen and (max-width: 500px) {
+      .comments-page{
+            height: 90vh;
+            padding: 8px;
+      }
+} */
+
+
+@media only screen and (max-width: 500px) {
+      .loader-post {
+            border-radius: 0;
+      }
 }

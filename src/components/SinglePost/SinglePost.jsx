@@ -3,23 +3,26 @@ import './SinglePost.css'
 import { Link } from 'react-router-dom'
 import { UilCommentDots, UilShare, UilRocket, UilMessage } from '@iconscout/react-unicons'
 import { UisRocket } from '@iconscout/react-unicons-solid'
-import { ActionIcon, Input, Indicator } from '@mantine/core';
+import { ActionIcon, Input, Indicator, ScrollArea, Loader } from '@mantine/core';
 import { useMoralis } from "react-moralis";
 import moment from 'moment'
 import { LazyLoadImage } from 'react-lazy-load-image-component';
+import Comments from './Comments'
+import CommentsCard from '../CommentCard/CommentsCard'
 
 const SinglePost = (props) => {
       const { data } = props
       const { Moralis } = useMoralis()
-      const [ like, setLiked ] = useState(data?.likedByMe)
-      const [ likeCount, setLikeCount ] = useState(data?.likes?.metadata?.total)
-      const [ commentCount, setCommentCount ] = useState(data?.comments?.metadata?.total)
-      const [ comment, setComment ] = useState("")
-      const [ loading, setLoading ] = useState(false)
-      
+      const [like, setLiked] = useState(data?.likedByMe)
+      const [likeCount, setLikeCount] = useState(data?.likes?.metadata?.total)
+      const [commentCount, setCommentCount] = useState(data?.comments?.metadata?.total)
+      const { comments, postId, loading, onSinglePage, hasMore, scrollRef } = props
+
+      const [sendCommentLoading, setSendCommentLoading] = useState(false)
+      const [comm, setComm] = useState()
+
       const likePost = async (e) => {
             e.preventDefault()
-            setLoading(true)
             setLiked(!like)
             const res = await Moralis.Cloud.run("likePost", { postId: data.objectId });
             if (res.status === "liked") {
@@ -27,16 +30,29 @@ const SinglePost = (props) => {
             } else {
                   setLikeCount(likeCount - 1)
             }
-            setLoading(false)
       }
-      
+
+      const createComment = async (e) => {
+            e.preventDefault()
+            setSendCommentLoading(true)
+            if (comm) {
+                  await Moralis.Cloud.run("createComment", { postId: postId, comment: comm });
+                  setComm("")
+            } else {
+                  alert("Comment must not empty, type something firts!")
+            }
+            setSendCommentLoading(false)
+      }
+
       return (
             <div className="Post" >
                   <div className="Header">
-                        <Link to={`/u/${data?.ownerData?.ethAddress}`}>
-                              <LazyLoadImage className='Header-Image' src={data?.ownerData?.pfp} alt="" />
-                        </Link>
-                        <span><b>{data?.ownerData?.username}</b></span>
+                        <div className='header-info-fix'>
+                              <Link to={`/u/${data?.ownerData?.ethAddress}`}>
+                                    <LazyLoadImage className='Header-Image' src={data?.ownerData?.pfp} alt="" />
+                              </Link>
+                              <span><b>{data?.ownerData?.username}</b></span>
+                        </div>
                   </div>
                   <div className='image'>
                         <LazyLoadImage src={data?.postImage} alt={data?.postImage} />
@@ -65,6 +81,46 @@ const SinglePost = (props) => {
                         </>
                         }
                         <div style={{ color: "grey", fontSize: '13.5px', marginTop: "5px" }}>Posted {moment(data?.createdAt).fromNow()}</div>
+                        <div className='single-post-comment-mobile'>
+                              <ScrollArea style={{
+                                    backgroundColor: "var(--card-background)",
+                                    padding: "5px", borderRadius: "10px"
+                              }} type="always"
+                              >
+                                    <ScrollArea viewportRef={scrollRef} className={`${onSinglePage ? `single-page-background` : "feed-page-background"}`}
+                                          style={{ height: "30vh", borderRadius: "10px" }}
+                                          type="always">
+                                          {comments.map((comment, key) => (
+                                                <CommentsCard key={key} comment={comment} />
+                                          ))}
+                                          {<div className={'loader-post'}>
+                                                <div className='loader-container'>
+                                                      {!loading && !hasMore && <span>No comments to load</span>}
+                                                      {loading && <Loader color={"lime"} size="xl" variant="dots" />}
+                                                </div>
+                                          </div>}
+                                    </ScrollArea>
+                                    <form className='comment-send'>
+                                          <Input
+                                                placeholder="Send comment...."
+                                                size="md"
+                                                required
+                                                value={comm}
+                                                rightSectionWidth={70}
+                                                onChange={(e) => setComm(e.currentTarget.value)}
+                                                rightSection={
+                                                      <ActionIcon radius="lg" size="xl" variant="transparent">
+                                                            {!sendCommentLoading ?
+                                                                  <UilMessage className="Post-Icon" onClick={(e) => createComment(e)} />
+                                                                  :
+                                                                  <Loader size={"sm"} />
+                                                            }
+                                                      </ActionIcon>
+                                                }
+                                          />
+                                    </form>
+                              </ScrollArea>
+                        </div>
                   </div>
             </div>
       )

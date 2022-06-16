@@ -55,7 +55,9 @@ const PostSide = () => {
   return (
     <div>
       <div ref={scrollRef} className={`PostSide`}>
-        <PostShare/>
+        <div className='hide-on-mobile'>
+          <PostShare />
+        </div>
         <Posts posts={posts} loading={loading} view="feed" />
         {<div className={'loader-post'}>
           <div className='loader-container'>

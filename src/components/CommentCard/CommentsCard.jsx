@@ -8,7 +8,7 @@ const CommentsCard = (props) => {
             <div className='comment-card'>
                   <div className='comment-info'>
                         <img className='comment-pfp' src={comment?.commenterData?.pfp} alt='' />
-                        <span>{comment?.commenterData?.username}</span>
+                        <span>{comment?.commenterData?.username.slice(0, 11)}{comment?.commenterData?.username.length >= 11 && "..."}</span>
                         <span>{moment(comment?.createdAt).fromNow()}</span>
                   </div>
                   <div className='actual-comment'>

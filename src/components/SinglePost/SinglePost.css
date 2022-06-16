@@ -3,7 +3,6 @@
       flex-direction: column;
       background-color: var(--card-background);
       border-radius: 0.8rem;
-      /* gap: 1rem; */
       /* height: 96vh; */
       overflow: scroll;
 }
@@ -19,6 +18,12 @@
             border-top: 1px solid rgb(46, 46, 46);
             border-radius: 0;
       }
+}
+
+.header-info-fix{
+      display: flex;
+      gap: .7rem;
+      align-items: center;
 }
 
 .Post-Icon {
@@ -185,4 +190,14 @@
       border: 1px solid var(--main-background);
       border-radius: 20px;
       color: var(--white);
+}
+
+.single-post-comment-mobile{
+      width: 100%;
+}
+
+@media only screen and (min-width: 1200px) {
+      .single-post-comment-mobile{
+            display: none;
+      }
 }

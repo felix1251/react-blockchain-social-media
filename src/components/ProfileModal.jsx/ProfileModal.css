@@ -21,6 +21,11 @@
       border-radius: 50%;
       object-fit: cover;
 }
+.update-image-preview2>img{
+      width: 10rem;
+      height:5.1rem;
+      object-fit: cover;
+}
 
 @media only screen and (max-width: 1600px) {
       .Profile-Modal{
@@ -31,6 +36,6 @@
 @media only screen and (max-width: 600px) {
       .Profile-Modal{
             width: 100%;  
-            padding: 10px;
+            padding: 8px;
       }
 }

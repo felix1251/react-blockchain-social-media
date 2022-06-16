@@ -6,6 +6,14 @@
 }
 
 
+
+@media only screen and (max-width: 1200px) {
+      .comments-right-side{
+            display: none;
+      }
+}
+
+
 @media only screen and (max-width: 1600px) {
       .post-page {
             grid-template-columns: auto 30rem;

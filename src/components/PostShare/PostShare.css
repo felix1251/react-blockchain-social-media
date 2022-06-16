@@ -1,4 +1,4 @@
-.PostShare{
+.PostShare {
     display: flex;
     gap: 1rem;
     background-color: var(--card-background);
@@ -13,39 +13,39 @@
     }
 }
 
-.mantine-1cj19bl{
+.mantine-1cj19bl {
     border-radius: 1rem;
-    background-color: rgba(0, 0, 0, .6)
+    background-color: rgba(0, 0, 0, 0.6);
 }
 
-.PostShare>img{
+.PostShare>img {
     border-radius: 50%;
     width: 3rem;
     height: 3rem;
 }
 
-.PostShare>form{
+.PostShare>form {
     display: flex;
     flex-direction: column;
     width: 90%;
     gap: 1rem;
 }
 
-.PostShare>form>input{
+.PostShare>form>input {
     background-color: var(--inputColor);
     border-radius: 10px;
-    padding: 10px;
+    padding: 17px;
     font-size: 17px;
     border: none;
     outline: none;
 }
 
-.postOptions{
+.postOptions {
     display: flex;
     justify-content: space-around;
 }
 
-.option{
+.option {
     padding: 5px;
     padding-left: 10px;
     padding-right: 10px;
@@ -56,34 +56,38 @@
     font-size: 12px;
 }
 
-.option:hover{
+.option:hover {
     cursor: pointer;
 }
 
-.ps-button{
+.ps-button {
     padding: 5px;
     padding-left: 20px;
     padding-right: 20px;
-    font-size: 12px
+    font-size: 12px;
 }
 
+@media only screen and (max-width: 1600px) {
+    .PostShare>form>input {
+        font-size: 13px;
+        padding: 10px;
+    }
+}
 
-.previewImage{
+.previewImage {
     position: relative;
 }
 
-.previewImage>svg{
+.previewImage>svg {
     position: absolute;
     right: 1rem;
     top: 0.5rem;
     cursor: pointer;
 }
 
-.previewImage>img{
+.previewImage>img {
     width: 100%;
     max-height: 20rem;
     object-fit: cover;
     border-radius: 0.5rem;
 }
-
-

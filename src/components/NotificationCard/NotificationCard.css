@@ -39,7 +39,9 @@
       
 }
 
-
+.viewed{
+      background-color: rgb(9, 28, 36);
+}
 
 .card-view{
       display: flex;

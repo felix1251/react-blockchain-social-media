@@ -30,7 +30,7 @@
 }
 
 .loader-container{
-    height: 55px;
+    height: 50px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -56,6 +56,12 @@
 @media only screen and (max-width: 500px) {
     .mobile-height {
         height: 60px;
+    }
+}
+
+@media only screen and (max-width: 1200px) {
+    .hide-on-mobile{
+        display: none;
     }
 }
 

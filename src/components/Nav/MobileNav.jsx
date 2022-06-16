@@ -26,6 +26,12 @@ const MobileNav = () => {
             if (!notifOpen) notifFetch()
       }
 
+      const closeOnly = () =>{
+            setNotifOpen(false)
+            setPage(0)
+            setData([])
+      }
+
       const notifFetch = async () => {
             setLoading(true)
             const res = await Moralis.Cloud.run("getNotif", { type: 2, page: page })
@@ -44,24 +50,30 @@ const MobileNav = () => {
                   <div className="Mobile-navIcons">
                         <div className="Icon-List">
                               <Link to="/">
-                                    <UisHouseUser className="Mobile-Icon" />
+                                    <UisHouseUser className="Mobile-Icon" onClick={() => closeOnly()} />
                               </Link>
-                              <UilImagePlus className="Mobile-Icon" onClick={() => setModalOpened(true)} />
+                              <UilImagePlus className="Mobile-Icon" onClick={() =>{ 
+                                    setModalOpened(true)
+                                    closeOnly()
+                              }} />
                               <Link to={"/p"}>
-                                    <UilUsersAlt className="Mobile-Icon" />
+                                    <UilUsersAlt className="Mobile-Icon" onClick={() => closeOnly()} />
                               </Link>
                               <UilSearch className="Mobile-Icon" />
                               <Indicator inline label={user.attributes.unReadNotif} size={17} color="red" offset={5} position="top-end">
                                     <UilBell className="Mobile-Icon" onClick={() => openNotif()} />
                               </Indicator>
-                              <UilUserCircle className="Mobile-Icon" onClick={()=> setProfileOpen(!profileOpen)}/>
+                              <UilUserCircle className="Mobile-Icon" onClick={()=> {
+                                    setProfileOpen(!profileOpen)
+                                    closeOnly()
+                              }}/>
                               
                         </div>
                   </div>
                   <ShareModal modalOpened={modalOpened} setModalOpened={setModalOpened} />
                   <MobileProfileNav setProfileOpen={setProfileOpen} profileOpen={profileOpen} />
                   <NotificationModal notifOpen={notifOpen} setNotifOpen={openNotif} notifFetch={notifFetch} hasMore={hasMore}
-                  loading={loading} position={"bottom"} size={"lg"} padding={"sm"} data={data} notifHeight={245} />
+                        loading={loading} position={"bottom"} size={"lg"} padding={"sm"} data={data} notifHeight={245} />
             </>
 
       );

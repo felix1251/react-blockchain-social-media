@@ -43,7 +43,7 @@ function App() {
               <Route path="/h" element={<Home />} />
               <Route path="/u/:address" element={<Profile />} />
               <Route path="/p" element={<User />} />
-              <Route path="/t" element={<Post />} />
+              <Route path="/t/:id" element={<Post />} />
             </Route>
             {isAuthenticated &&
               <Route path="/auth" element={<Auth />} />

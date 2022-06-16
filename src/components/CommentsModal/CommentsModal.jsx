@@ -1,17 +1,18 @@
-import React, { useEffect } from 'react'
+import React  from 'react'
 // import { useState } from 'react';
-import { Drawer, ScrollArea } from '@mantine/core';
+import { Drawer } from '@mantine/core';
+import Comments from '../SinglePost/Comments';
 // import { useMoralis } from 'react-moralis';
 
 const CommentsModal = (props) => {
-      const { setOpened, opened } = props
+      const { opened, modalCommentLoading, postId, modalComment, closeCommentModal, hasMore, scrollRef } = props
       return (
             <div>
                   <Drawer
                         opened={opened}
-                        onClose={() => setOpened(false)}
+                        onClose={() => closeCommentModal()}
                         title="Comments"
-                        padding="xl"
+                        padding="sm"
                         position="right"
                         size="xl"
                         styles={{
@@ -22,13 +23,7 @@ const CommentsModal = (props) => {
                               title: { fontWeight: 800, fontSize: "20px" },
                         }}
                   >
-                        <ScrollArea
-                              style={{ height: "60vh" }}
-                        >
-                              <div style={{ width: "100%" }}>
-                                    hi
-                              </div>
-                        </ScrollArea>
+                        <Comments comments={modalComment} loading={modalCommentLoading} onSinglePage={false} postId={postId} hasMore={hasMore} scrollRef={scrollRef}/>
                   </Drawer>
             </div>
       )

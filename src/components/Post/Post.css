@@ -35,10 +35,22 @@
     .Post-Icon:hover {
         color: var(--white);
     }
+    .Post-Icon {
+        height: 1.7rem;
+        width: 1.7rem;
+    }
+    .Post-Icon-Liked {
+        height: 1.7rem;
+        width: 1.7rem;
+    }
 }
 
 .mantine-tzt201 {
     padding: 8px;
+}
+
+.link{
+    text-decoration: none;
 }
 
 .dots{
@@ -167,8 +179,11 @@
     color: rgb(1, 175, 255);
 }
 
-.Details>span {
-    font-size: 16px;
+
+@media only screen and (max-width: 500px) {
+    .Details>span {
+        font-size: 14px;
+    }
 }
 
 .Header-Comments-list {

@@ -19,10 +19,14 @@ function ProfileModal({ modalOpened, setModalOpened }) {
   const [username, setUsername] = useState(user.attributes.username)
   const [bio, setBio] = useState(user.attributes.bio)
   const [pfp, setPfp] = useState(user.attributes.pfp)
+  const [cover, setCover] = useState(user.attributes.cover)
   const [file, setFile] = useState(null);
   const [image, setImage] = useState(null);
+  const [file2, setFile2] = useState(null);
+  const [image2, setImage2] = useState(null);
   const [loading, setLoading] = useState(false);
   const imageRef = useRef();
+  const imageRef2 = useRef();
 
   const update = async (e) => {
     e.preventDefault()
@@ -36,12 +40,21 @@ function ProfileModal({ modalOpened, setModalOpened }) {
     if (username !== user.attributes.username) {
       myDetails.set("username", username)
     }
-
+    
     if (file) {
       const data = file
-      const fileData = new Moralis.File(data.name, data)
+      const filename = data.name.replace(/[^0-9a-zA-Z.]/g, '');
+      const fileData = new Moralis.File(filename, data)
       await fileData.saveIPFS()
       myDetails.set("pfp", fileData.ipfs())
+    }
+
+    if (file2) {
+      const data2 = file2
+      const filename2 = data2.name.replace(/[^0-9a-zA-Z.]/g, '');
+      const fileData2 = new Moralis.File(filename2, data2)
+      await fileData2.saveIPFS()
+      myDetails.set("cover", fileData2.ipfs())
     }
     
     await myDetails.save()
@@ -57,11 +70,21 @@ function ProfileModal({ modalOpened, setModalOpened }) {
     }
   };
 
+  const onImageChange2 = (event) => {
+    if (event.target.files && event.target.files[0]) {
+      let img = event.target.files[0];
+      setFile2(img)
+      setImage2({ image: URL.createObjectURL(img) });
+    }
+  };
+
   const closeModal = () => {
     if(!loading){
       setModalOpened(false)
       setFile(null)
       setImage(null)
+      setFile2(null)
+      setImage2(null)
       setPfp(user.attributes.pfp)
       setUsername(user.attributes.username)
       setBio(user.attributes.bio)
@@ -77,10 +100,9 @@ function ProfileModal({ modalOpened, setModalOpened }) {
       opened={modalOpened}
       onClose={() => closeModal()}
     >
-        <LoadingOverlay overlayColor="rgba(0, 0, 0, 0.4)" loader={load()} radius="lg" visible={loading} />
+      <LoadingOverlay overlayColor="rgba(0, 0, 0, 0.4)" loader={load()} radius="lg" visible={loading} />
       <form className="infoForm" onSubmit={update}>
-      
-        <h3>Edit Info</h3>
+        <span><b>Edit Info</b></span>
         <div>
           <span><b>Profile Picture</b></span>
           <div className="update-profile">
@@ -99,6 +121,28 @@ function ProfileModal({ modalOpened, setModalOpened }) {
                 name="myImage"
                 ref={imageRef}
                 onChange={onImageChange}
+              />
+            </div>
+          </div>
+        </div>
+        <div>
+          <span><b>Cover Picture</b></span>
+          <div className="update-profile">
+            <div className="update-image-preview2">
+              <img src={image2 ? image2.image : cover} alt="" />
+            </div>
+            <div className="option" style={{ color: "var(--photo)" }}
+              onClick={() => imageRef2.current.click()}
+            >
+              <UilScenery />
+              Select Photo
+            </div>
+            <div style={{ display: "none" }}>
+              <input
+                type="file"
+                name="myImage"
+                ref={imageRef2}
+                onChange={onImageChange2}
               />
             </div>
           </div>
