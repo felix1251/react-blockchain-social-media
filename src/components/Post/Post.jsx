@@ -19,8 +19,8 @@ const option = {
 const Post = ({ data }) => {
   const { Moralis } = useMoralis()
   const [like, setLiked] = useState(data?.likedByMe)
-  const [likeCount, setLikeCount] = useState(data?.likes?.metadata?.total)
-  const [commentCount, setCommentCount] = useState(data?.comments?.metadata?.total)
+  const [likeCount, setLikeCount] = useState(data?.likes?.total)
+  const [commentCount, setCommentCount] = useState(data?.comments?.total)
   const [comment, setComment] = useState("")
   const [modalComment, setModalComment] = useState([])
   const [loading, setLoading] = useState(false)
@@ -36,7 +36,7 @@ const Post = ({ data }) => {
     // e.preventDefault()
     setSendCommentLoading(true)
     if (comment) {
-      const res = await Moralis.Cloud.run("createComment", { postId: data.objectId, comment: comment });
+      const res = await Moralis.Cloud.run("createComment", { postId: data?.objectId, comment: comment });
       setCommentCount(commentCount + 1)
 
       setComment("")
@@ -88,6 +88,10 @@ const Post = ({ data }) => {
     setCommentHasMore(false)
   }
 
+  const sharePost = () => {
+    alert("This feature is not yet available. Will be on next release")
+  }
+
   return (
     <div className="Post" >
       <div className="Header">
@@ -108,9 +112,11 @@ const Post = ({ data }) => {
               <Button color="lime" component={Link} to={`/t/${data.objectId}`}>
                 View
               </Button>
-              <Button color="red">
-                Delete
-              </Button>
+              {data?.isMyPost &&
+                <Button color="red">
+                  Delete
+                </Button>
+              }
             </div>
           </Popover>
         </div>
@@ -124,25 +130,42 @@ const Post = ({ data }) => {
           <Indicator inline label={commentCount} size={17} color="red" offset={5} position="bottom-end" disabled={commentCount > 0 ? false : true}>
             <UilCommentDots className="Post-Icon" onClick={() => fetchModalComments()} />
           </Indicator>
-          <UilShare className="Post-Icon" />
+          <UilShare className="Post-Icon" onClick={()=> sharePost()}/>
         </div>
         <div className="Details">
-          <span><b>{data?.ownerData.username}</b></span>{" "}
+          <span><b>{data?.ownerData?.username}</b></span>{" "}
           <span>{data?.postDescription}</span>
         </div>
-        <span style={{ color: "var(--white)", fontSize: '14px' }}>{likeCount} rocket likes</span>
-        {data.comments.lazy_data.length > 0 && <><hr className='line' />
+        {data?.likes?.lazy_data.length > 0 &&
           <div className="user-followed-list">
-            {data.comments.lazy_data.map((comm, key) => (
-              <span key={key} className='Header-Comments-list'>{!comm.isMe ? comm.commenterData.username : "You"}{data.comments.lazy_data.length > 1 && ", "}</span>
+            {data?.likes?.lazy_data.map((comm, key) => (
+              <span key={key} className='Header-Comments-list'>
+                {!comm.isMe ? <span className='liker-name'>{comm?.likerData?.username}</span> : <span className='liker-name'>You</span>}
+                {key + 1 === data?.likes?.lazy_data.length - 1 && !data.likes.isMore && " and "}
+                {data?.likes?.lazy_data.length === 3 && key === 0 && ", "}
+                {data?.likes?.lazy_data.length === 3 && key === 1 && data.likes.isMore && ", "}
+              </span>
+            ))}
+            {data?.likes.isMore && <span className='Header-Comments-list'> and more</span>}
+            <span className='Header-Comments-list'> liked {data?.isMyPost ? "your" : "this"} post</span>
+          </div>
+        }
+        <span style={{ color: "var(--white)", fontSize: '14px' }}>{likeCount} rocket likes</span>
+        {data?.comments?.lazy_data?.length > 0 && <><hr className='line' />
+          {/* <div className="user-followed-list">
+            {data?.comments?.lazy_data.map((comm, key) => (
+              <span key={key} className='Header-Comments-list'>{!comm.isMe ? comm?.commenterData?.username : "You"}
+              {key+1 === data?.comments?.lazy_data.length-1 && !data.comments.isMore && " and "}
+              {(data?.comments?.lazy_data.length === 3 && key === 0) || data.comments.isMore && ", "}
+              </span>
             ))}
             {data.comments.isMore && <span className='Header-Comments-list'> and more</span>}
             <span className='Header-Comments-list'> commented this post</span>
-          </div>
+          </div> */}
           {data.comments.lazy_data.map((comm, key) => (
             <div key={key} className="Comments">
-              <span><b>{comm.commenterData.username}</b></span>{" "}
-              <span>{comm.comment.slice(0, 40)}{comm.comment.length >= 40 && ".... show more"}</span>{" "}
+              <span><b>{comm?.commenterData?.username}</b></span>{" "}
+              <span>{comm.comment.slice(0, 40)}{comm.comment.length >= 40 && "..."}</span>{" "}
               {comm.isMe && <span>(You)</span>}
             </div>
           ))}

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { UilBell, UilUserCircle, UilSearch, UilImagePlus, UilUsersAlt } from "@iconscout/react-unicons";
 import { UisHouseUser } from '@iconscout/react-unicons-solid'
 import "./Nav.css";
@@ -11,21 +11,26 @@ const Nav = () => {
       const [modalOpened, setModalOpened] = useState(false);
       const { user, Moralis } = useMoralis()
       const [notifOpen, setNotifOpen] = useState(false);
+      const [notifCount, setNotifCount] = useState(localStorage.getItem("userNotifNumber"));
       const [data, setData] = useState([])
       const [loading, setLoading] = useState(false)
       const [page, setPage] = useState(0)
       const [hasMore, setHasMore] = useState(false)
 
-      const openNotif = () => {
+      const openNotif = async () => {
             setNotifOpen(!notifOpen)
             setPage(0) 
             setData([])
-            if(!notifOpen) notifFetch()
+            if(!notifOpen){
+                  notifFetch()
+                  const res = await Moralis.Cloud.run("clearNotifNumber")
+                  setNotifCount(res)
+            }
       }
 
       const notifFetch = async () => {
             setLoading(true)
-            const res = await Moralis.Cloud.run("getNotif", { type: 1, page: page })
+            const res = await Moralis.Cloud.run("getNotif", { page: page })
             if (res.length > 0) {
                   setHasMore(true)
                   setPage(page + 1)
@@ -36,6 +41,13 @@ const Nav = () => {
             setLoading(false)
       }
 
+      useEffect(() => {
+            const load = async () =>{
+                  const res = await Moralis.Cloud.run("userNotifNumber")
+                  setNotifCount(res.attributes.unReadNotif)
+            }
+            load()
+      }, [Moralis])
       
       return (
             <>
@@ -48,7 +60,7 @@ const Nav = () => {
                               <UilUsersAlt className="Icon" />
                         </Link>
                         <UilSearch className="Icon Hide-Show-Icon" />
-                        <Indicator inline label={user.attributes.unReadNotif} size={17} color="red" offset={5} position="bottom-end">
+                        <Indicator inline label={notifCount} size={17} color="red" offset={5} position="bottom-end">
                               <UilBell className="Mobile-Icon" onClick={() => openNotif()} />
                         </Indicator>
                         <Link to={`/u/${user.attributes.ethAddress}`}>

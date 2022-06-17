@@ -211,3 +211,8 @@
     width: 100%;
 }
 
+.liker-name{
+    color: var(--liked);
+    font-weight: bolder;
+}
+

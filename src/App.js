@@ -10,7 +10,7 @@ import ProtectedRoutes from "./ProtectedRoutes";
 import { useMoralis } from "react-moralis";
 import ConnectButtonProvider from "./components/ConnectMoralis/ConnectButton";
 import { LazyLoadImage } from 'react-lazy-load-image-component';
-import { lazy, Suspense} from "react";
+import { lazy, Suspense } from "react";
 import { Loader } from "@mantine/core";
 
 const Post = lazy(() => import("./pages/Post/Post.jsx"))
@@ -29,8 +29,8 @@ const loader = () => {
 }
 
 function App() {
-  const { isAuthenticated } = useMoralis()
-
+  const { isAuthenticated} = useMoralis()
+  
   return (
     <div className="App">
       {isAuthenticated && <LazyLoadImage className="logo-header" src={Logo} alt="" />}

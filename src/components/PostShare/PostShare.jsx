@@ -27,7 +27,8 @@ const PostShare = () => {
     if (file) {
       setLoading(true)
       const data = file
-      const fileData = new Moralis.File(data.name, data)
+      const filename = data.name.replace(/[^0-9a-zA-Z.]/g, '');
+      const fileData = new Moralis.File(filename, data)
       await fileData.saveIPFS()
       await Moralis.Cloud.run("createPost", { desc: desc, ipfsHash: fileData.ipfs() });
       setOpen(true);

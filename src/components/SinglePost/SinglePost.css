@@ -10,7 +10,7 @@
 @media only screen and (max-width: 1600px) {
       .Post {
             margin-top: 0px;
-            height: 88vh;
+            height: 85vh;
             overflow: scroll;
       }
 }
@@ -202,4 +202,9 @@
       .single-post-comment-mobile{
             display: none;
       }
+}
+
+.liker-name{
+      color: var(--liked);
+      font-weight: bolder;
 }

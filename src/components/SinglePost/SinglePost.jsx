@@ -53,8 +53,8 @@ const SinglePost = (props) => {
                         },
                         "objectId": Date.now()
                   }
-                  setComments(prev=> [userComment, ...prev])
-                  
+                  setComments(prev => [userComment, ...prev])
+
                   setComm("")
             } else {
                   alert("Comment must not empty, type something firts!")
@@ -87,8 +87,22 @@ const SinglePost = (props) => {
                               <span><b>{data?.ownerData?.username}</b></span>{" "}
                               <span>{data?.postDescription}</span>
                         </div>
+                        {data?.likes?.lazy_data.length > 0 &&
+                              <div className="user-followed-list">
+                                    {data?.likes?.lazy_data.map((comm, key) => (
+                                          <span key={key} className='Header-Comments-list'>
+                                                {!comm.isMe ? <span className='liker-name'>{comm?.likerData?.username}</span> : <span className='liker-name'>You</span>}
+                                                {key + 1 === data?.likes?.lazy_data.length - 1 && !data.likes.isMore && " and "}
+                                                {data?.likes?.lazy_data.length === 3 && key === 0 && ", "}
+                                                {data?.likes?.lazy_data.length === 3 && key === 1 && data.likes.isMore && ", "}
+                                          </span>
+                                    ))}
+                                    {data?.likes.isMore && <span className='Header-Comments-list'> and more</span>}
+                                    <span className='Header-Comments-list'> liked {data?.isMyPost ? "your" : "this"} post</span>
+                              </div>
+                        }
                         <span style={{ color: "var(--white)", fontSize: '14px' }}>{likeCount} rocket likes</span>
-                        {data?.comments?.lazy_data.length > 0 && <><hr className='line' />
+                        {/* {data?.comments?.lazy_data.length > 0 && <><hr className='line' />
                               <div className="user-followed-list">
                                     {data?.comments?.lazy_data.map((comm, key) => (
                                           <span key={key} className='Header-Comments-list'>{!comm.isMe ? comm?.commenterData?.username : "You"}{data.comments.lazy_data.length > 1 && ", "}</span>
@@ -97,7 +111,7 @@ const SinglePost = (props) => {
                                     <span className='Header-Comments-list'> commented this post</span>
                               </div>
                         </>
-                        }
+                        } */}
                         <div style={{ color: "grey", fontSize: '13.5px', marginTop: "5px" }}>Posted {moment(data?.createdAt).fromNow()}</div>
                         <div className='single-post-comment-mobile'>
                               <ScrollArea style={{
@@ -113,7 +127,7 @@ const SinglePost = (props) => {
                                           ))}
                                           {<div className={'loader-post'}>
                                                 <div className='loader-container'>
-                                                      {!loading && !hasMore && <span>No comments to load</span>}
+                                                      {!loading && !hasMore && <span>comment ends here</span>}
                                                       {loading && <Loader color={"lime"} size="xl" variant="dots" />}
                                                 </div>
                                           </div>}

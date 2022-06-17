@@ -9,15 +9,15 @@ const FollowersCard = () => {
     const [loading, setLoading] = useState([])
     const { Moralis } = useMoralis()
 
-    useEffect(() => {
-        setLoading(true)
-        const load = async () => {
-            const res = await Moralis.Cloud.run("getRecomUser");
-            setUsers(res)
-            setLoading(false)
-        }
-        load()
-    }, [Moralis])
+    // useEffect(() => {
+    //     setLoading(true)
+    //     const load = async () => {
+    //         const res = await Moralis.Cloud.run("getRecomUser");
+    //         setUsers(res)
+    //         setLoading(false)
+    //     }
+    //     load()
+    // }, [Moralis])
 
     const followUser = async (UserId) => {
         await Moralis.Cloud.run("followUser", { userId: UserId });

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { UilBell, UilUserCircle, UilSearch, UilImagePlus, UilUsersAlt } from "@iconscout/react-unicons";
 import { UisHouseUser } from '@iconscout/react-unicons-solid'
 import "./MobileNav.css";
@@ -13,17 +13,22 @@ const MobileNav = () => {
       const [modalOpened, setModalOpened] = useState(false);
       const { user, Moralis } = useMoralis()
       const [notifOpen, setNotifOpen] = useState(false);
+      const [notifCount, setNotifCount] = useState(0);
       const [profileOpen, setProfileOpen] = useState(false)
       const [data, setData] = useState([])
       const [loading, setLoading] = useState(false)
       const [page, setPage] = useState(0)
       const [hasMore, setHasMore] = useState(false)
 
-      const openNotif = () => {
+      const openNotif =  async() => {
             setNotifOpen(!notifOpen)
             setPage(0)
             setData([])
-            if (!notifOpen) notifFetch()
+            if (!notifOpen) {
+                  notifFetch()
+                  const res = await Moralis.Cloud.run("clearNotifNumber")
+                  setNotifCount(res)
+            }
       }
 
       const closeOnly = () =>{
@@ -34,7 +39,7 @@ const MobileNav = () => {
 
       const notifFetch = async () => {
             setLoading(true)
-            const res = await Moralis.Cloud.run("getNotif", { type: 2, page: page })
+            const res = await Moralis.Cloud.run("getNotif", { page: page })
             if (res.length > 0) {
                   setHasMore(true)
                   setPage(page + 1)
@@ -44,6 +49,14 @@ const MobileNav = () => {
             }
             setLoading(false)
       }
+
+      useEffect(() => {
+            const load = async () =>{
+                  const res = await Moralis.Cloud.run("userNotifNumber")
+                  setNotifCount(res.attributes.unReadNotif)
+            }
+            load()
+      }, [Moralis])
 
       return (
             <>
@@ -60,7 +73,7 @@ const MobileNav = () => {
                                     <UilUsersAlt className="Mobile-Icon" onClick={() => closeOnly()} />
                               </Link>
                               <UilSearch className="Mobile-Icon" />
-                              <Indicator inline label={user.attributes.unReadNotif} size={17} color="red" offset={5} position="top-end">
+                              <Indicator inline label={notifCount} size={17} color="red" offset={5} position="top-end">
                                     <UilBell className="Mobile-Icon" onClick={() => openNotif()} />
                               </Indicator>
                               <UilUserCircle className="Mobile-Icon" onClick={()=> {

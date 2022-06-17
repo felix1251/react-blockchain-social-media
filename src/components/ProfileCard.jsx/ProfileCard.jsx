@@ -22,8 +22,8 @@ const ProfileCard = ({ inHome }) => {
         const res = await Moralis.Cloud.run("getUser", { adr: address });
         setUser(res[0])
       } else {
-        const res = await Moralis.Cloud.run("getUser", { adr: Moralis.User.current().attributes.ethAddress });
-        setUser(res[0])
+        const currUser = Moralis.User.current()
+        setUser(currUser.attributes)
       }
       setLoading(false)
     }
