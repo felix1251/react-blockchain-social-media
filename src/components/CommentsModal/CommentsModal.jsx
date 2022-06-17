@@ -5,7 +5,7 @@ import Comments from '../SinglePost/Comments';
 // import { useMoralis } from 'react-moralis';
 
 const CommentsModal = (props) => {
-      const { opened, modalCommentLoading, postId, modalComment, closeCommentModal, hasMore, scrollRef } = props
+      const { opened, modalCommentLoading, postId, modalComment, closeCommentModal, hasMore, scrollRef, setComments } = props
       return (
             <div>
                   <Drawer
@@ -23,7 +23,7 @@ const CommentsModal = (props) => {
                               title: { fontWeight: 800, fontSize: "20px" },
                         }}
                   >
-                        <Comments comments={modalComment} loading={modalCommentLoading} onSinglePage={false} postId={postId} hasMore={hasMore} scrollRef={scrollRef}/>
+                        <Comments setComments={setComments} comments={modalComment} loading={modalCommentLoading} onSinglePage={false} postId={postId} hasMore={hasMore} scrollRef={scrollRef}/>
                   </Drawer>
             </div>
       )

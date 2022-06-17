@@ -7,23 +7,25 @@ import { ActionIcon, Input, Indicator, ScrollArea, Loader } from '@mantine/core'
 import { useMoralis } from "react-moralis";
 import moment from 'moment'
 import { LazyLoadImage } from 'react-lazy-load-image-component';
-import Comments from './Comments'
+// import Comments from './Comments'
 import CommentsCard from '../CommentCard/CommentsCard'
+import { v4 as uuidv4 } from 'uuid';
 
 const SinglePost = (props) => {
       const { data } = props
-      const { Moralis } = useMoralis()
+      const { Moralis, user } = useMoralis()
       const [like, setLiked] = useState(data?.likedByMe)
       const [likeCount, setLikeCount] = useState(data?.likes?.metadata?.total)
       const [commentCount, setCommentCount] = useState(data?.comments?.metadata?.total)
-      const { comments, postId, loading, onSinglePage, hasMore, scrollRef } = props
+      const { comments, postId, loading, onSinglePage, hasMore, scrollRef, setComments } = props
 
       const [sendCommentLoading, setSendCommentLoading] = useState(false)
-      const [comm, setComm] = useState()
+      const [comm, setComm] = useState("")
 
       const likePost = async (e) => {
             e.preventDefault()
             setLiked(!like)
+            setCommentCount()
             const res = await Moralis.Cloud.run("likePost", { postId: data.objectId });
             if (res.status === "liked") {
                   setLikeCount(likeCount + 1)
@@ -37,6 +39,22 @@ const SinglePost = (props) => {
             setSendCommentLoading(true)
             if (comm) {
                   await Moralis.Cloud.run("createComment", { postId: postId, comment: comm });
+                  const userComment = {
+                        "postId": postId,
+                        "commenterId": Date.now(),
+                        "comment": comm,
+                        "createdAt": Date.now(),
+                        "updatedAt": Date.now(),
+                        "commenterData": {
+                              "_id": Date.now(),
+                              "pfp": user.attributes.pfp,
+                              "username": user.attributes.username,
+                              "ethAddress": user.attributes.ethAddress
+                        },
+                        "objectId": Date.now()
+                  }
+                  setComments(prev=> [userComment, ...prev])
+                  
                   setComm("")
             } else {
                   alert("Comment must not empty, type something firts!")
@@ -106,6 +124,7 @@ const SinglePost = (props) => {
                                                 size="md"
                                                 required
                                                 value={comm}
+                                                style={{ width: "95%" }}
                                                 rightSectionWidth={70}
                                                 onChange={(e) => setComm(e.currentTarget.value)}
                                                 rightSection={

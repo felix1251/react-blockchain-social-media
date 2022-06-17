@@ -3,13 +3,15 @@
       flex-direction: column;
       background-color: var(--card-background);
       border-radius: 0.8rem;
-      /* height: 96vh; */
+      height: 96vh;
       overflow: scroll;
 }
 
 @media only screen and (max-width: 1600px) {
       .Post {
             margin-top: 0px;
+            height: 88vh;
+            overflow: scroll;
       }
 }
 

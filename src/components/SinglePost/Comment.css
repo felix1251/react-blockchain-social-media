@@ -38,6 +38,24 @@
       }
 }
 
+
+.comment-send{
+      display: flex;
+      justify-content: center;
+      align-items: center;
+}
+
+@media only screen and (max-width: 500px) {
+      .comment-send{
+            position: fixed;
+            bottom: 70px;
+            right: 0;
+            left: 0;
+      }
+}
+
+
+
 /* .comments-page{
       height: 65vh;
       padding: 12px;

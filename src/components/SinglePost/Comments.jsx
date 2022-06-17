@@ -7,16 +7,31 @@ import "./Comment.css"
 import Nav from '../Nav/Nav'
 
 const Comments = (props) => {
-      const { comments, postId, onSinglePage, loading, hasMore, scrollRef } = props
+      const { comments, postId, onSinglePage, loading, hasMore, scrollRef, setComments } = props
       const [sendCommentLoading, setSendCommentLoading] = useState(false)
-      const [comm, setComm] = useState()
-      const { Moralis } = useMoralis()
+      const [comm, setComm] = useState("")
+      const { Moralis, user } = useMoralis()
 
       const createComment = async (e) => {
             e.preventDefault()
             setSendCommentLoading(true)
             if (comm) {
                   await Moralis.Cloud.run("createComment", { postId: postId, comment: comm });
+                  const userComment = {
+                        "postId": postId,
+                        "commenterId": Date.now(),
+                        "comment": comm,
+                        "createdAt": Date.now(),
+                        "updatedAt": Date.now(),
+                        "commenterData": {
+                              "_id": Date.now(),
+                              "pfp": user.attributes.pfp,
+                              "username": user.attributes.username,
+                              "ethAddress": user.attributes.ethAddress
+                        },
+                        "objectId": Date.now()
+                  }
+                  setComments(prev=> [userComment, ...prev])
                   setComm("")
             } else {
                   alert("Comment must not empty, type something firts!")
@@ -44,6 +59,7 @@ const Comments = (props) => {
                         <Input
                               placeholder="Send comment...."
                               size="md"
+                              style={{width: "95%"}}
                               required
                               value={comm}
                               rightSectionWidth={70}

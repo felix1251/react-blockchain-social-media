@@ -33,11 +33,12 @@ const Post = ({ data }) => {
   const [modalCommentLoading, setModalCommentLoading] = useState(false)
 
   const createComment = async (e) => {
-    e.preventDefault()
+    // e.preventDefault()
     setSendCommentLoading(true)
     if (comment) {
       const res = await Moralis.Cloud.run("createComment", { postId: data.objectId, comment: comment });
       setCommentCount(commentCount + 1)
+
       setComment("")
     } else {
       alert("Comment must not empty, type something firts!")
@@ -169,7 +170,7 @@ const Post = ({ data }) => {
           }
         />
       </form>
-      <CommentsModal opened={opened} modalCommentLoading={modalCommentLoading}
+      <CommentsModal setComments={setModalComment} opened={opened} modalCommentLoading={modalCommentLoading}
         closeCommentModal={closeCommentModal} postId={data.objectId} modalComment={modalComment}
         hasMore={commentHasMore} scrollRef={scrollRef} />
     </div>
