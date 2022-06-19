@@ -3,11 +3,12 @@ import FollowersCard from '../FollowersCard/FollowersCard'
 import InfoCard from '../InfoCard/InfoCard'
 import Nav from '../Nav/Nav';
 import "./ProfileLeft.css"
-const ProfileLeft = ({isParamsEqualToAccount}) => {
+const ProfileLeft = (props) => {
+  const {isMe} = props
   return (
     <div className="ProfileSide">
       <Nav/>
-      {isParamsEqualToAccount && <InfoCard />}
+      {isMe && <InfoCard />}
       <FollowersCard />
     </div>
   )

@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
 import './Post.css'
 import { Link } from 'react-router-dom'
-import { UilCommentDots, UilShare, UilRocket, UilMessage, UilGripHorizontalLine,  UilBookmarkFull} from '@iconscout/react-unicons'
-import { UisRocket, UisBookmark } from '@iconscout/react-unicons-solid'
+import { UilCommentDots, UilShare, UilRocket, UilMessage, UilGripHorizontalLine, UilBookmarkFull, UilUserCircle } from '@iconscout/react-unicons'
+import { UisRocket, UisBookmark} from '@iconscout/react-unicons-solid'
 import { ActionIcon, Input, Indicator, Popover, Loader, LoadingOverlay } from '@mantine/core';
 import { useMoralis } from "react-moralis";
 import moment from 'moment'
@@ -16,7 +16,7 @@ const option = {
   debounce: 0,
 }
 
-const Post = ({ data}) => {
+const Post = ({ data }) => {
   const { Moralis } = useMoralis()
   const [like, setLiked] = useState(data?.likedByMe)
   const [addedToFavorites, setAddedToFavorites] = useState(data?.addedToFavorites)
@@ -102,6 +102,10 @@ const Post = ({ data}) => {
     alert("This feature is not yet available. Will be on next release")
   }
 
+  const myPost = (e) => {
+    alert("This is your post!")
+  }
+
   const addToFavorites = async (e) => {
     e.preventDefault()
     setAddedToFavorites(!addedToFavorites)
@@ -155,10 +159,15 @@ const Post = ({ data}) => {
             </Indicator>
             <UilShare className="Post-Icon" onClick={() => sharePost()} />
           </div>
-          <div>
-            {addedToFavorites ? <UisBookmark onClick={(e) => addToFavorites(e)} className="Post-Icon-Liked" /> 
-            : <UilBookmarkFull className="Post-Icon" onClick={(e) => addToFavorites(e)} />}
+          {!data?.isMyPost ? <div>
+            {addedToFavorites ? <UisBookmark onClick={(e) => addToFavorites(e)} className="Post-Icon-Liked" />
+              : <UilBookmarkFull className="Post-Icon" onClick={(e) => addToFavorites(e)} />}
           </div>
+            :
+            <div>
+              <UilUserCircle className="Post-Icon" onClick={(e)=>myPost(e)}/>
+            </div>
+          }
         </div>
         <div className="Details">
           <span><b>{data?.ownerData?.username}</b></span>{" "}
@@ -180,16 +189,6 @@ const Post = ({ data}) => {
         }
         <span style={{ color: "var(--white)", fontSize: '14px' }}>{likeCount} rocket likes</span>
         {data?.comments?.lazy_data?.length > 0 && <><hr className='line' />
-          {/* <div className="user-followed-list">
-            {data?.comments?.lazy_data.map((comm, key) => (
-              <span key={key} className='Header-Comments-list'>{!comm.isMe ? comm?.commenterData?.username : "You"}
-              {key+1 === data?.comments?.lazy_data.length-1 && !data.comments.isMore && " and "}
-              {(data?.comments?.lazy_data.length === 3 && key === 0) || data.comments.isMore && ", "}
-              </span>
-            ))}
-            {data.comments.isMore && <span className='Header-Comments-list'> and more</span>}
-            <span className='Header-Comments-list'> commented this post</span>
-          </div> */}
           {data.comments.lazy_data.map((comm, key) => (
             <div key={key} className="Comments">
               <span><b>{comm?.commenterData?.username}</b></span>{" "}

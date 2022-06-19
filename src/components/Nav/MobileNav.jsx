@@ -8,10 +8,12 @@ import { useMoralis } from "react-moralis";
 import { Indicator } from "@mantine/core";
 import NotificationModal from "../NotificationModal/NotificationModal.jsx";
 import MobileProfileNav from "../MobileProfileNav/MobileProfileNav";
+import SearchModal from "../SearchModal/SearchModal";
 
 const MobileNav = () => {
       const [modalOpened, setModalOpened] = useState(false);
-      const { user, Moralis } = useMoralis()
+      const { Moralis } = useMoralis()
+      const [searchOpened, setSearchOpened] = useState(false);
       const [notifOpen, setNotifOpen] = useState(false);
       const [notifCount, setNotifCount] = useState(0);
       const [profileOpen, setProfileOpen] = useState(false)
@@ -50,6 +52,14 @@ const MobileNav = () => {
             setLoading(false)
       }
 
+      const closeSearchModal =()=>{
+            setSearchOpened(false)
+      }
+
+      const  closePostModalModal = () => {
+            setModalOpened(false)
+      }
+
       useEffect(() => {
             const load = async () =>{
                   const res = await Moralis.Cloud.run("userNotifNumber")
@@ -68,11 +78,15 @@ const MobileNav = () => {
                               <UilImagePlus className="Mobile-Icon" onClick={() =>{ 
                                     setModalOpened(true)
                                     closeOnly()
+                                    closeSearchModal()
                               }} />
                               <Link to={"/p"}>
                                     <UilUsersAlt className="Mobile-Icon" onClick={() => closeOnly()} />
                               </Link>
-                              <UilSearch className="Mobile-Icon" />
+                              <UilSearch className="Mobile-Icon" onClick={() =>{ 
+                                    setSearchOpened(true)
+                                    closePostModalModal()
+                                    }}/>
                               <Indicator inline label={notifCount} size={17} color="red" offset={5} position="top-end">
                                     <UilBell className="Mobile-Icon" onClick={() => openNotif()} />
                               </Indicator>
@@ -84,6 +98,7 @@ const MobileNav = () => {
                         </div>
                   </div>
                   <ShareModal modalOpened={modalOpened} setModalOpened={setModalOpened} />
+                  <SearchModal modalOpened={searchOpened} setModalOpened={setSearchOpened} />
                   <MobileProfileNav setProfileOpen={setProfileOpen} profileOpen={profileOpen} />
                   <NotificationModal notifOpen={notifOpen} setNotifOpen={openNotif} notifFetch={notifFetch} hasMore={hasMore}
                         loading={loading} position={"bottom"} size={"lg"} padding={"sm"} data={data} notifHeight={245} />

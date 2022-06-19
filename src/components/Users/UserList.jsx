@@ -30,6 +30,7 @@ const UserList = () => {
             }
             setLoading(false);
       };
+
       const onBottomFetch = () => {
             if (!loading) fetch();
       };
@@ -53,9 +54,10 @@ const UserList = () => {
                         return <UserCard key={id} username={pep.username} followers={pep.followers}
                               ethAddress={pep.ethAddress} pfp={pep.pfp} isFollowed={pep.isFollowed} isMe={pep.isMe} userId={pep.objectId} />
                   })}
-                  {loading && <div className='loader-post'>
-                        <div className="userlist-loader">
-                              <Loader color={"orange"} size="xl" variant="dots" />
+                  {<div className={'loader-post'}>
+                        <div className='loader-container'>
+                              {!hasMore && !loading && <span>ends here...</span>}
+                              {loading && <Loader color={"lime"} size="xl" variant="dots" />}
                         </div>
                   </div>}
             </div>

@@ -1,0 +1,62 @@
+.followed-list {
+      display: flex;
+      flex-direction: column;
+      gap: .6rem;
+}
+
+@media only screen and (max-width: 500px) {
+      .user-list {
+            gap: 0;
+            height: 100vh;
+      }
+}
+
+.mantine-1opdmpb {
+      display: flex;
+      flex-direction: column;
+      gap: .6rem;
+}
+
+@media only screen and (max-width: 500px) {
+      .mantine-1opdmpb {
+            gap: 0rem;
+      }
+      
+}
+
+.mantine-15lh44n:hover{
+      background-color: transparent;
+}
+
+.mantine-1wh8mct{
+      background-color: var(--card-background);
+      gap: 0;
+}
+
+.loader-post {
+      display: flex;
+      width: 100%;
+      border-radius: 15px;
+      justify-content: center;
+      align-items: center;
+      background-color: var(--card-background);
+}
+
+@media only screen and (max-width: 500px) {
+      .loader-post {
+            border-radius: 0;
+      }
+}
+
+.userlist-loader{
+      height: 100px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+}
+
+@media only screen and (max-width: 500px) {
+      .userlist-loader {
+            height: 70px;
+      }
+}

@@ -86,6 +86,7 @@ function ProfileModal({ modalOpened, setModalOpened }) {
       setFile2(null)
       setImage2(null)
       setPfp(user.attributes.pfp)
+      setCover(user.attributes.cover)
       setUsername(user.attributes.username)
       setBio(user.attributes.bio)
     }

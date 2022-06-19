@@ -7,8 +7,10 @@ import ShareModal from "../ShareModal/ShareModal";
 import { useMoralis } from "react-moralis";
 import { Indicator } from "@mantine/core";
 import NotificationModal from "../NotificationModal/NotificationModal";
+import SearchModal from "../SearchModal/SearchModal";
 const Nav = () => {
       const [modalOpened, setModalOpened] = useState(false);
+      const [searchOpened, setSearchOpened] = useState(false);
       const { user, Moralis } = useMoralis()
       const [notifOpen, setNotifOpen] = useState(false);
       const [notifCount, setNotifCount] = useState(localStorage.getItem("userNotifNumber"));
@@ -59,7 +61,7 @@ const Nav = () => {
                         <Link to={"/p"}>
                               <UilUsersAlt className="Icon" />
                         </Link>
-                        <UilSearch className="Icon Hide-Show-Icon" />
+                        <UilSearch className="Icon Hide-Show-Icon" onClick={() => setSearchOpened(true)}/>
                         <Indicator inline label={notifCount} size={17} color="red" offset={5} position="bottom-end">
                               <UilBell className="Mobile-Icon" onClick={() => openNotif()} />
                         </Indicator>
@@ -68,6 +70,7 @@ const Nav = () => {
                         </Link>
                   </div>
                   <ShareModal modalOpened={modalOpened} setModalOpened={setModalOpened} />
+                  <SearchModal modalOpened={searchOpened} setModalOpened={setSearchOpened} />
                   <NotificationModal notifOpen={notifOpen} setNotifOpen={openNotif} loading={loading} notifFetch={notifFetch}
                   hasMore={hasMore} position={"right"} size={"xl"} padding={"md"} data={data} notifHeight={400}/>
             </>

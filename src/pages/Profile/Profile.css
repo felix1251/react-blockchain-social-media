@@ -14,17 +14,12 @@
 }
 
 @media only screen and (max-width: 500px) {
-    .Profile-center {
-        gap: 0;
+    .Profile-center{
+        margin-top: 0px;
+        gap: 0rem;
+        height: 93vh;
     }
 }
-
-@media only screen and (max-width: 1200px) {
-    .Profile-center {
-        height: 92.8vh;
-    }
-}
-
 
 .loader {
     width: 100%;
@@ -36,6 +31,7 @@
     display: flex;
     flex-direction: column;
     gap: 1rem;
+    min-height: 400px;
 }
 
 @media only screen and (max-width: 500px) {

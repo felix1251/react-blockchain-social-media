@@ -61,14 +61,24 @@ const Post = () => {
             <div className='post-page'>
                   <RightSide />
                   {!loading ?
-                        <SinglePost setComments={setComments} data={postData} comments={comments} postId={id} loading={commentLoading} onSinglePage={true} hasMore={commentHasMore} scrollRef={scrollRef}/>
+                        <>
+                              {postData ? <SinglePost setComments={setComments} data={postData} comments={comments}
+                                    postId={id} loading={commentLoading} onSinglePage={true} hasMore={commentHasMore} scrollRef={scrollRef} />
+                              :
+                              <span style={{alignSelf: "center", justifySelf: "center"}}>
+                                    this post does not exist or been deleted..
+                              </span>
+                        }
+                        </>
+
                         :
                         <div className='loader-container'>
                               <Loader color={"lime"} size="xl" variant="dots" />
                         </div>
                   }
                   <div className='comments-right-side'>
-                        <Comments comments={comments} postId={id} loading={commentLoading} hasMore={commentHasMore} onSinglePage={true} scrollRef={scrollRef}/>
+                        <Comments comments={comments} postId={id} loading={commentLoading}
+                              hasMore={commentHasMore} onSinglePage={true} scrollRef={scrollRef} />
                   </div>
             </div>
       )

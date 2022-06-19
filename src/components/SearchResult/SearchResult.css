@@ -1,0 +1,23 @@
+.results{
+      display: flex;
+      flex-direction: row;
+      min-width: 200px;
+      align-items: center;
+      gap: .5rem;
+      border: 1px solid black;
+      padding: 4px;
+      border-radius: 10px;
+}
+.result-info{
+      display: flex;
+      flex-direction: column;
+}
+
+.result-info>span:nth-child(1){
+      font-size: 15px;
+      font-weight: 600;
+}
+.result-info>span:nth-child(2){
+      font-size: 13px;
+      color: grey;
+}

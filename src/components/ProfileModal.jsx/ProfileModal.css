@@ -39,3 +39,20 @@
             padding: 8px;
       }
 }
+
+@media only screen and (max-width: 600px) {
+      .update-image-preview>img{
+            width: 4rem;
+            height: 4rem;
+      }
+      .update-image-preview2>img{
+            width: 7rem;
+            height:3.2rem;
+            object-fit: cover;
+      }
+}
+
+.mantine-121w2fi{
+      margin-bottom: 0;
+      margin-right: 0;
+}
