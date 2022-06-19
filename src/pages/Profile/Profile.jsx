@@ -53,7 +53,7 @@ const Profile = () => {
   useEffect(() => {
     const load = async () => {
       setLoading(true)
-      const user = await Moralis.Cloud.run("getUser", { adr: address })
+      const user = await Moralis.Cloud.run("getUserId", { adr: address })
       localStorage.setItem("lastViewdUserId", user[0].objectId)
       const res = await Moralis.Cloud.run("userPosts", { userId: localStorage.getItem("lastViewdUserId"), page: 0 })
       if(res.length > 0){

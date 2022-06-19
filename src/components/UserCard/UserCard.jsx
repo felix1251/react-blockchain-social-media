@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import "./UserCard.css"
 import { useMoralis } from 'react-moralis';
+import { Link } from 'react-router-dom';
 
 const UserCard = ({ username, ethAddress, followers, pfp, isMe, isFollowed, userId }) => {
   const [followed, setFollowed] = useState(isFollowed)
@@ -25,9 +26,12 @@ const UserCard = ({ username, ethAddress, followers, pfp, isMe, isFollowed, user
   return (
     <div className='user-card'>
       <div className='user-right'>
-        <LazyLoadImage className='user-image' src={pfp} alt="" />
+        <Link to={"/u/"+ethAddress}>
+          <LazyLoadImage className='user-image' src={pfp} alt="" />
+        </Link>
         <div className='user-details'>
           <span>{username.slice(0, 25)}{username.length > 25 && "...."}</span>
+          <span>{ethAddress.slice(0, 5)}...{ethAddress.slice(38)}</span>
           <span> {followerCount} followers</span>
         </div>
       </div>

@@ -51,7 +51,7 @@ const UserList = () => {
             <div ref={scrollRef} className="user-list">
                   {peps.map((pep, id) => {
                         return <UserCard key={id} username={pep.username} followers={pep.followers}
-                              ethAddres={pep.ethAddress} pfp={pep.pfp} isFollowed={pep.isFollowed} isMe={pep.isMe} userId={pep.objectId} />
+                              ethAddress={pep.ethAddress} pfp={pep.pfp} isFollowed={pep.isFollowed} isMe={pep.isMe} userId={pep.objectId} />
                   })}
                   {loading && <div className='loader-post'>
                         <div className="userlist-loader">

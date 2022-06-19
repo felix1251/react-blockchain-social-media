@@ -13,6 +13,7 @@ const ProfileCard = ({ inHome }) => {
   const { address } = useParams();
   const [user, setUser] = useState()
   const [loading, setLoading] = useState(false)
+  const [follow, setFollow] = useState(false)
   const [modalOpened, setModalOpened] = useState(false);
 
   useEffect(() => {
@@ -20,10 +21,15 @@ const ProfileCard = ({ inHome }) => {
       setLoading(true)
       if (address) {
         const res = await Moralis.Cloud.run("getUser", { adr: address });
+        localStorage.setItem("lastViewdUserId", res[0].objectId)
         setUser(res[0])
+        setFollow(res[0].isFollowed)
       } else {
         const currUser = Moralis.User.current()
-        setUser(currUser.attributes)
+        const res = await Moralis.Cloud.run("getUser", { adr: currUser.attributes.ethAddress });
+        localStorage.setItem("lastViewdUserId", res[0].objectId)
+        setUser(res[0])
+        setFollow(res[0].isFollowed)
       }
       setLoading(false)
     }
@@ -36,10 +42,15 @@ const ProfileCard = ({ inHome }) => {
     return currUser.attributes.ethAddress === user?.ethAddress
   }
 
+  const followUser = async () => {
+    setFollow(!follow)
+    await Moralis.Cloud.run("followUser", { userId: user.objectId });
+  }
+
   return (
     <div className="ProfileCard">
       <div className={`ProfileImages ${inHome && "in-home"} `}>
-        <img src={user ? user?.cover: logo} alt="" />
+        <img src={user ? user?.cover : logo} alt="" />
         <img src={user ? user?.pfp : logo} alt="" />
       </div>
       <div className="ProfileName">
@@ -55,10 +66,15 @@ const ProfileCard = ({ inHome }) => {
               />
             </>
           }</span>
-        {loading && <Loader variant="dots" color={"lime"} size="xl" />}
+          {loading && <Loader variant="dots" color={"lime"} size="xl" />}
         </>
         {user && <span>{user?.ethAddress.slice(0, 5)}...{user?.ethAddress.slice(38)}</span>}
         <span>{user?.bio}</span>
+        {!loading && !user?.isMe &&
+          <button onClick={()=> followUser()} className={`${!follow ? "button" : "followed-button"} fc-button button-sizing`}>
+            {!follow ? "Follow" : "Unfollow"}
+          </button>
+        }
       </div>
 
       <div className="followStatus">

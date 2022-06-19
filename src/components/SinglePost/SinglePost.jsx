@@ -3,13 +3,12 @@ import './SinglePost.css'
 import { Link } from 'react-router-dom'
 import { UilCommentDots, UilShare, UilRocket, UilMessage } from '@iconscout/react-unicons'
 import { UisRocket } from '@iconscout/react-unicons-solid'
-import { ActionIcon, Input, Indicator, ScrollArea, Loader } from '@mantine/core';
+import { ActionIcon, Input, Indicator, ScrollArea, Loader, Popover, Button, LoadingOverlay } from '@mantine/core';
 import { useMoralis } from "react-moralis";
 import moment from 'moment'
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 // import Comments from './Comments'
 import CommentsCard from '../CommentCard/CommentsCard'
-import { v4 as uuidv4 } from 'uuid';
 
 const SinglePost = (props) => {
       const { data } = props
@@ -18,6 +17,7 @@ const SinglePost = (props) => {
       const [likeCount, setLikeCount] = useState(data?.likes?.metadata?.total)
       const [commentCount, setCommentCount] = useState(data?.comments?.metadata?.total)
       const { comments, postId, loading, onSinglePage, hasMore, scrollRef, setComments } = props
+      const [deleteLoading, setDeleteLoading] = useState(false)
 
       const [sendCommentLoading, setSendCommentLoading] = useState(false)
       const [comm, setComm] = useState("")
@@ -32,6 +32,14 @@ const SinglePost = (props) => {
             } else {
                   setLikeCount(likeCount - 1)
             }
+      }
+
+      const deletePost = async (e) => {
+            e.preventDefault()
+            setDeleteLoading(true)
+            const res = await Moralis.Cloud.run("deletePost", { postId: data.objectId });
+            setDeleteLoading(false)
+            window.location = "/h"
       }
 
       const createComment = async (e) => {
@@ -64,6 +72,7 @@ const SinglePost = (props) => {
 
       return (
             <div className="Post" >
+                  <LoadingOverlay  visible={deleteLoading} />
                   <div className="Header">
                         <div className='header-info-fix'>
                               <Link to={`/u/${data?.ownerData?.ethAddress}`}>
@@ -71,6 +80,13 @@ const SinglePost = (props) => {
                               </Link>
                               <span><b>{data?.ownerData?.username}</b></span>
                         </div>
+                        {data?.isMyPost &&
+                              <div className="dots">
+                                    <Button onClick={(e)=> deletePost(e)} color="red">
+                                          Delete
+                                    </Button>
+                              </div>
+                        }
                   </div>
                   <div className='image'>
                         <LazyLoadImage src={data?.postImage} alt={data?.postImage} />
@@ -102,16 +118,6 @@ const SinglePost = (props) => {
                               </div>
                         }
                         <span style={{ color: "var(--white)", fontSize: '14px' }}>{likeCount} rocket likes</span>
-                        {/* {data?.comments?.lazy_data.length > 0 && <><hr className='line' />
-                              <div className="user-followed-list">
-                                    {data?.comments?.lazy_data.map((comm, key) => (
-                                          <span key={key} className='Header-Comments-list'>{!comm.isMe ? comm?.commenterData?.username : "You"}{data.comments.lazy_data.length > 1 && ", "}</span>
-                                    ))}
-                                    {data?.comments.isMore && <span className='Header-Comments-list'> and more</span>}
-                                    <span className='Header-Comments-list'> commented this post</span>
-                              </div>
-                        </>
-                        } */}
                         <div style={{ color: "grey", fontSize: '13.5px', marginTop: "5px" }}>Posted {moment(data?.createdAt).fromNow()}</div>
                         <div className='single-post-comment-mobile'>
                               <ScrollArea style={{

@@ -7,7 +7,8 @@ import Snackbar from '@mui/material/Snackbar';
 import MuiAlert from '@mui/material/Alert';
 import { LoadingOverlay } from '@mantine/core';
 
-const PostShare = () => {
+const PostShare = (props) => {
+  const {setModalOpened} = props
   const [image, setImage] = useState(null);
   const [file, setFile] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -21,7 +22,6 @@ const PostShare = () => {
     setOpen(false);
   };
 
-
   const create = async (e) => {
     e.preventDefault()
     if (file) {
@@ -31,11 +31,12 @@ const PostShare = () => {
       const fileData = new Moralis.File(filename, data)
       await fileData.saveIPFS()
       await Moralis.Cloud.run("createPost", { desc: desc, ipfsHash: fileData.ipfs() });
-      setOpen(true);
       setDesc("")
       setFile(null)
       setImage(null)
       setLoading(false)
+      setModalOpened(false)
+      setOpen(true);
     } else {
       alert("Select a photo first")
     }

@@ -16,7 +16,7 @@ const Posts = ({ view, posts}) => {
         </>
       } */}
       {posts.map((post, id) => {
-        return <Post data={post} id={id} key={id} />
+        return <Post data={post} id={id} key={id}/>
       })}
     </div>
   )

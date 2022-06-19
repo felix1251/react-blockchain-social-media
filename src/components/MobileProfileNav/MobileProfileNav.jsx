@@ -31,7 +31,8 @@ const MobileProfileNav = (props) => {
                               color: "var(--white)", textDecoration: "none", display: "flex",
                               alignItems: "center",
                         }} to={`/u/${user.attributes.ethAddress}`}>
-                              <UilUserCircle className="profile-nav-Icon" />{" "}Go to Profile
+                              <UilUserCircle className="profile-nav-Icon" />
+                              {" "}Go to Profile
                         </Link>
                         <Link to="/auth">
                               <Button onClick={() => logout()} color="orange">

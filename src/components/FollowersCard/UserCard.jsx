@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { Link } from 'react-router-dom'
 import "./FollowersCard.css"
 
 const UserCard = ({user, followUser}) => {
@@ -12,11 +13,13 @@ const UserCard = ({user, followUser}) => {
       return (
             <div className="follower">
                   <div>
-                        <img src={user?.pfp} alt="" className='followerImage' />
+                        <Link to={"/t/"+user?.ethAddress}>
+                              <img src={user?.pfp} alt="" className='followerImage' />
+                        </Link>
                         <div className="name">
                               <span>{user?.username}</span>
                               <span>{user?.ethAddress.slice(0, 5)}...{user?.ethAddress.slice(38)}</span>
-                              {/* <span>{user?.followers} followers</span> */}
+                              <span>{user?.followers} followers</span>
                         </div>
                   </div>
                   <button onClick={() => follow()} className={`${!isFollowed ? "button" : "followed-button"} fc-button button-sizing`}>

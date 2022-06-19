@@ -18,7 +18,7 @@ function ShareModal({ modalOpened, setModalOpened }) {
       title="Create Post"
       onClose={() => setModalOpened(false)}
     >
-    <PostShare/>
+    <PostShare setModalOpened={setModalOpened}/>
     </Modal>
   );
 }
