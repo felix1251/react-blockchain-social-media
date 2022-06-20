@@ -1,5 +1,8 @@
+import { createRequire } from 'module';
+const require = createRequire(import.meta.url);
 var path = require('path');
 var express = require('express');
+
 
 var app = express();
 
