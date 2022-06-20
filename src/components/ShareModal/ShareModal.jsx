@@ -1,5 +1,5 @@
 import { Modal, useMantineTheme } from "@mantine/core";
-import PostShare from "../PostShare/PostShare";
+import PostShare from "../PostShare/PostShare.jsx";
 import './PostModal.css'
 
 function ShareModal({ modalOpened, setModalOpened }) {
@@ -11,6 +11,7 @@ function ShareModal({ modalOpened, setModalOpened }) {
       overlayOpacity={0.55}
       overlayBlur={3}
       transition="fade"
+      trapFocus={false}
       classNames={{ modal: 'Post-Modal'}}
       transitionDuration={300}
       transitionTimingFunction="ease"

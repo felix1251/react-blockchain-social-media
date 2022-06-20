@@ -1,0 +1,46 @@
+.metamask{
+      height: 2rem;
+      width: 2rem;
+}
+
+.tutorial{
+      display: flex;
+      overflow: auto;
+      flex-direction: column;
+}
+.Info-Modal{
+      width: 400px;
+}
+
+@media only screen and (max-width: 380px) {
+      .Info-Modal{
+            width: 330px;
+      }
+}
+
+.step{
+      display: flex;
+      flex-direction: column;
+      gap: .5rem;
+}
+
+.step>h4{
+      margin-bottom: 0;
+}
+
+
+.metamask-btn{
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      gap: .3rem;
+      font-size: 15px;
+      border-radius: 20px;
+      border: none;
+      background-color: var(--card-background);
+      color: var(--white);
+      padding: 5px;
+      cursor: pointer;
+      text-decoration: none;
+}

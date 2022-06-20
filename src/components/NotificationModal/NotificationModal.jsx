@@ -1,6 +1,6 @@
 
 import { Drawer, Loader } from '@mantine/core';
-import NotificationCard from '../NotificationCard/NotificationCard';
+import NotificationCard from '../NotificationCard/NotificationCard.jsx';
 import "./NotificationModal.css"
 import { ScrollArea } from '@mantine/core';
 import { useBottomScrollListener } from 'react-bottom-scroll-listener';

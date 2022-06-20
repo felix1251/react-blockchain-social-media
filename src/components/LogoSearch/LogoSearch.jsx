@@ -3,7 +3,7 @@ import { UilSearch } from "@iconscout/react-unicons";
 import "./LogoSearch.css";
 import { Loader, Popover } from "@mantine/core";
 import { useMoralis } from "react-moralis";
-import SearchResultCard from "../SearchResult/SearchResult";
+import SearchResultCard from "../SearchResult/SearchResult.jsx";
 const LogoSearch = (props) => {
     const {onModal, setModalOpened} = props
     const [result, setResult] = useState([])

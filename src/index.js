@@ -1,11 +1,10 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import App from "./App";
+import App from "./App.js";
 import { MoralisProvider } from "react-moralis";
-import env from "react-dotenv";
 
 ReactDOM.render(
-  <MoralisProvider appId={env.APP_ID} serverUrl={env.SERVER_URL} >
+  <MoralisProvider appId={process.env.REACT_APP_MORALIS_APP_ID} serverUrl={process.env.REACT_APP_MORALIS_SERVER_URL} >
     <App />
   </MoralisProvider>,
   document.getElementById("root")

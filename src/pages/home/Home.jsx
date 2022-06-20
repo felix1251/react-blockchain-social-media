@@ -1,10 +1,8 @@
 import React, { lazy } from "react";
 import "./Home.css";
-const ProfileSide = lazy(() =>
-  import("../../components/profileSide/ProfileSide")
-);
-const RightSide = lazy(() => import("../../components/RightSide/RightSide"));
-const PostSide = lazy(() => import("../../components/PostSide/PostSide"));
+import ProfileSide from "../../components/profileSide/ProfileSide.jsx"
+const RightSide = lazy(() => import("../../components/RightSide/RightSide.jsx"));
+const PostSide = lazy(() => import("../../components/PostSide/PostSide.jsx"));
 
 const Home = () => {
 

@@ -1,7 +1,7 @@
 import React from 'react'
-import FollowersCard from '../FollowersCard/FollowersCard'
-import InfoCard from '../InfoCard/InfoCard'
-import Nav from '../Nav/Nav';
+import FollowersCard from '../FollowersCard/FollowersCard.jsx'
+import InfoCard from '../InfoCard/InfoCard.jsx'
+import Nav from '../Nav/Nav.jsx';
 import "./ProfileLeft.css"
 const ProfileLeft = (props) => {
   const {isMe} = props

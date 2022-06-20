@@ -1,10 +1,10 @@
 import { ActionIcon, Input, Loader, ScrollArea } from '@mantine/core'
 import React, { useState } from 'react'
-import CommentsCard from '../CommentCard/CommentsCard'
+import CommentsCard from '../CommentCard/CommentsCard.jsx'
 import { UilMessage } from '@iconscout/react-unicons'
 import { useMoralis } from 'react-moralis'
 import "./Comment.css"
-import Nav from '../Nav/Nav'
+import Nav from '../Nav/Nav.jsx'
 
 const Comments = (props) => {
       const { comments, postId, onSinglePage, loading, hasMore, scrollRef, setComments } = props

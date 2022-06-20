@@ -1,6 +1,6 @@
 import React from 'react'
 import './Posts.css'
-import Post from '../Post/Post'
+import Post from '../Post/Post.jsx'
 const Posts = ({posts}) => {
   return (
     <div className="Posts">

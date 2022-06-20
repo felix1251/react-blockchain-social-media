@@ -1,5 +1,5 @@
 import { Modal, useMantineTheme } from "@mantine/core";
-import LogoSearch from "../LogoSearch/LogoSearch";
+import LogoSearch from "../LogoSearch/LogoSearch.jsx";
 import './SearchModal.css'
 
 function SearchModal({ modalOpened, setModalOpened }) {
@@ -10,6 +10,7 @@ function SearchModal({ modalOpened, setModalOpened }) {
       overlayOpacity={0.55}
       overlayBlur={3}
       transition="fade"
+      trapFocus={false}
       classNames={{ modal: 'Search-Modal'}}
       transitionDuration={300}
       transitionTimingFunction="ease"

@@ -1,0 +1,12 @@
+.float-begin{
+      position: fixed;
+      bottom: 0;
+      cursor: pointer;
+      z-index: 10;
+      padding: 35px;
+}
+
+.begin{
+      display: flex;
+      font-weight: 700;
+}

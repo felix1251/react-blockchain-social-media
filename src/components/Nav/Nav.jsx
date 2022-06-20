@@ -3,11 +3,11 @@ import { UilBell, UilUserCircle, UilSearch, UilImagePlus, UilUsersAlt } from "@i
 import { UisHouseUser } from '@iconscout/react-unicons-solid'
 import "./Nav.css";
 import { Link } from "react-router-dom";
-import ShareModal from "../ShareModal/ShareModal";
+import ShareModal from "../ShareModal/ShareModal.jsx";
 import { useMoralis } from "react-moralis";
 import { Indicator } from "@mantine/core";
-import NotificationModal from "../NotificationModal/NotificationModal";
-import SearchModal from "../SearchModal/SearchModal";
+import NotificationModal from "../NotificationModal/NotificationModal.jsx";
+import SearchModal from "../SearchModal/SearchModal.jsx";
 const Nav = () => {
       const [modalOpened, setModalOpened] = useState(false);
       const [searchOpened, setSearchOpened] = useState(false);

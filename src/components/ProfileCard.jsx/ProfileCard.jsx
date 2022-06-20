@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from "react";
-import Cover from "../../img/cover.jpg";
 import "./ProfileCard.css";
 import { useMoralis } from "react-moralis";
 import { useParams } from "react-router-dom";
-import ProfileModal from "../ProfileModal.jsx/ProfileModal";
+import ProfileModal from "../ProfileModal.jsx/ProfileModal.jsx";
 import { UilPen } from "@iconscout/react-unicons";
 import logo from "../../img/logo.png"
 import { Loader } from "@mantine/core";

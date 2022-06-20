@@ -1,19 +1,20 @@
 import React, { useState } from 'react'
 import './SinglePost.css'
 import { Link } from 'react-router-dom'
-import { UilCommentDots, UilShare, UilRocket, UilMessage } from '@iconscout/react-unicons'
-import { UisRocket } from '@iconscout/react-unicons-solid'
-import { ActionIcon, Input, Indicator, ScrollArea, Loader, Popover, Button, LoadingOverlay } from '@mantine/core';
+import { ActionIcon, Input, ScrollArea, Loader, Button, LoadingOverlay, Indicator } from '@mantine/core';
+import { UisRocket, UisBookmark } from '@iconscout/react-unicons-solid'
+import { UilCommentDots, UilShare, UilRocket, UilMessage, UilBookmarkFull, UilUserCircle } from '@iconscout/react-unicons'
 import { useMoralis } from "react-moralis";
 import moment from 'moment'
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 // import Comments from './Comments'
-import CommentsCard from '../CommentCard/CommentsCard'
+import CommentsCard from '../CommentCard/CommentsCard.jsx'
 
 const SinglePost = (props) => {
       const { data } = props
       const { Moralis, user } = useMoralis()
       const [like, setLiked] = useState(data?.likedByMe)
+      const [addedToFavorites, setAddedToFavorites] = useState(data?.addedToFavorites)
       const [likeCount, setLikeCount] = useState(data?.likes?.metadata?.total)
       const [commentCount, setCommentCount] = useState(data?.comments?.metadata?.total)
       const { comments, postId, loading, onSinglePage, hasMore, scrollRef, setComments } = props
@@ -34,12 +35,31 @@ const SinglePost = (props) => {
             }
       }
 
+      const myPost = (e) => {
+            alert("This is your post!")
+      }
+
       const deletePost = async (e) => {
             e.preventDefault()
             setDeleteLoading(true)
             const res = await Moralis.Cloud.run("deletePost", { postId: data.objectId });
             setDeleteLoading(false)
             window.location = "/h"
+      }
+
+      const addToFavorites = async (e) => {
+            e.preventDefault()
+            setAddedToFavorites(!addedToFavorites)
+            const res = await Moralis.Cloud.run("addToFavorites", { postId: data.objectId });
+            if (res.status === "saved_to_favorites") {
+                  setAddedToFavorites(true)
+            } else {
+                  setAddedToFavorites(false)
+            }
+      }
+
+      const sharePost = () => {
+            alert("This feature is not yet available. Will be on next release")
       }
 
       const createComment = async (e) => {
@@ -72,7 +92,7 @@ const SinglePost = (props) => {
 
       return (
             <div className="Post" >
-                  <LoadingOverlay  visible={deleteLoading} />
+                  <LoadingOverlay visible={deleteLoading} />
                   <div className="Header">
                         <div className='header-info-fix'>
                               <Link to={`/u/${data?.ownerData?.ethAddress}`}>
@@ -82,7 +102,7 @@ const SinglePost = (props) => {
                         </div>
                         {data?.isMyPost &&
                               <div className="dots">
-                                    <Button onClick={(e)=> deletePost(e)} color="red">
+                                    <Button onClick={(e) => deletePost(e)} color="red">
                                           Delete
                                     </Button>
                               </div>
@@ -93,11 +113,22 @@ const SinglePost = (props) => {
                   </div>
                   <div className='Infos'>
                         <div className="postReact">
-                              {like ? <UisRocket onClick={e => likePost(e)} className="Post-Icon-Liked" /> : <UilRocket className="Post-Icon" onClick={e => likePost(e)} />}
-                              <Indicator inline label={commentCount} size={17} color="red" offset={5} position="bottom-end" disabled={commentCount > 0 ? false : true}>
-                                    <UilCommentDots className="Post-Icon" />
-                              </Indicator>
-                              <UilShare className="Post-Icon" />
+                              <div>
+                                    {like ? <UisRocket onClick={e => likePost(e)} className="Post-Icon-Liked" /> : <UilRocket className="Post-Icon" onClick={e => likePost(e)} />}
+                                    <Indicator inline label={commentCount} size={17} color="red" offset={5} position="bottom-end" disabled={commentCount > 0 ? false : true}>
+                                          <UilCommentDots className="Post-Icon" />
+                                    </Indicator>
+                                    <UilShare className="Post-Icon" onClick={() => sharePost()} />
+                              </div>
+                              {!data?.isMyPost ? <div>
+                                    {addedToFavorites ? <UisBookmark onClick={(e) => addToFavorites(e)} className="Post-Icon-Liked" />
+                                          : <UilBookmarkFull className="Post-Icon" onClick={(e) => addToFavorites(e)} />}
+                              </div>
+                                    :
+                                    <div>
+                                          <UilUserCircle className="Post-Icon" onClick={(e) => myPost(e)} />
+                                    </div>
+                              }
                         </div>
                         <div className="Details">
                               <span><b>{data?.ownerData?.username}</b></span>{" "}

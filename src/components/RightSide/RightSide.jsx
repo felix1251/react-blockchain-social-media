@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import "./RightSide.css";
-import LogoSearch from "../LogoSearch/LogoSearch";
+import LogoSearch from "../LogoSearch/LogoSearch.jsx";
 // import TrendCard from "../TrendCard/TrendCard";
-import ShareModal from "../ShareModal/ShareModal";
+import ShareModal from "../ShareModal/ShareModal.jsx";
 
 const RightSide = () => {
   const [modalOpened, setModalOpened] = useState(false);

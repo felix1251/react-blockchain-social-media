@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import "./NotificationCard.css"
 import { LazyLoadImage } from 'react-lazy-load-image-component';
-import ClassType from './ClassType';
+import ClassType from './ClassType.jsx';
 import { Link } from 'react-router-dom';
 
 const NotificationCard = (props) => {

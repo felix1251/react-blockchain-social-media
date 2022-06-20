@@ -1,6 +1,6 @@
 import React from "react";
-import FollowersCard from "../FollowersCard/FollowersCard";
-import ProfileCard from "../ProfileCard.jsx/ProfileCard";
+import FollowersCard from "../FollowersCard/FollowersCard.jsx";
+import ProfileCard from "../ProfileCard.jsx/ProfileCard.jsx";
 import Nav from "../Nav/Nav.jsx";
 import "./ProfileSide.css";
 // import ConnectButtonProvider from "../ConnectMoralis/ConnectButton";

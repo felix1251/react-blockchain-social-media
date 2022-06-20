@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
-import Posts from '../Posts/Posts'
-import PostShare from '../PostShare/PostShare'
+import Posts from '../Posts/Posts.jsx'
+import PostShare from '../PostShare/PostShare.jsx'
 import './PostSide.css'
 import { useMoralis } from 'react-moralis'
 import { useBottomScrollListener } from 'react-bottom-scroll-listener';

@@ -1,6 +1,6 @@
 import { useMoralis } from "react-moralis";
 import { Outlet } from "react-router-dom";
-import Auth from "./pages/Auth/Auth";
+import Auth from "./pages/Auth/Auth.jsx";
 
 const UseAuth = () => {
       const { isAuthenticated } = useMoralis()

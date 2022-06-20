@@ -3,6 +3,7 @@
     flex-direction: column;
     background-color: var(--card-background);
     border-radius: 0.8rem;
+    overflow: hidden;
     /* gap: 1rem; */
 }
 

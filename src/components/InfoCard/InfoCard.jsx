@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./InfoCard.css";
 import { UilPen } from "@iconscout/react-unicons";
-import ProfileModal from "../ProfileModal.jsx/ProfileModal";
+import ProfileModal from "../ProfileModal.jsx/ProfileModal.jsx";
 import { useMoralis } from "react-moralis";
 
 const InfoCard = () => {

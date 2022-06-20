@@ -1,7 +1,7 @@
 import React  from 'react'
 // import { useState } from 'react';
 import { Drawer } from '@mantine/core';
-import Comments from '../SinglePost/Comments';
+import Comments from '../SinglePost/Comments.jsx';
 // import { useMoralis } from 'react-moralis';
 
 const CommentsModal = (props) => {

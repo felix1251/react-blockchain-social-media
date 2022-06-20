@@ -99,6 +99,7 @@ function ProfileModal({ modalOpened, setModalOpened }) {
       overlayBlur={3}
       classNames={{ modal: 'Profile-Modal' }}
       opened={modalOpened}
+      trapFocus={false}
       onClose={() => closeModal()}
     >
       <LoadingOverlay overlayColor="rgba(0, 0, 0, 0.4)" loader={load()} radius="lg" visible={loading} />

@@ -1,13 +1,13 @@
 import React, { useState } from 'react'
 import './Post.css'
 import { Link } from 'react-router-dom'
-import { UilCommentDots, UilShare, UilRocket, UilMessage, UilGripHorizontalLine, UilBookmarkFull, UilUserCircle } from '@iconscout/react-unicons'
 import { UisRocket, UisBookmark} from '@iconscout/react-unicons-solid'
+import { UilCommentDots, UilShare, UilRocket, UilMessage, UilGripHorizontalLine, UilBookmarkFull, UilUserCircle } from '@iconscout/react-unicons'
 import { ActionIcon, Input, Indicator, Popover, Loader, LoadingOverlay } from '@mantine/core';
 import { useMoralis } from "react-moralis";
 import moment from 'moment'
 import { LazyLoadImage } from 'react-lazy-load-image-component';
-import CommentsModal from '../CommentsModal/CommentsModal'
+import CommentsModal from '../CommentsModal/CommentsModal.jsx'
 import { Button } from '@mantine/core';
 import { useBottomScrollListener } from 'react-bottom-scroll-listener'
 
@@ -130,6 +130,7 @@ const Post = ({ data }) => {
         <div className="dots">
           <Popover
             opened={visible}
+            trapFocus={false}
             onClose={() => setVisible(false)}
             target={<UilGripHorizontalLine onClick={() => setVisible(true)} />}
             position="bottom"
