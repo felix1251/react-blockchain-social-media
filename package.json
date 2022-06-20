@@ -39,14 +39,11 @@
     "url": "^0.11.0",
     "uuid": "^8.3.2",
     "web-vitals": "^2.1.0",
-    "web3uikit": "^0.1.116"
+    "web3uikit": "0.1.116"
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts start",
-    "build-prod": "webpack --mode=production",
-    "build-dev": "webpack --mode=development",
-    "webpack-dev-server": "webpack-dev-server"
+    "build": "react-scripts build"
   },
   "eslintConfig": {
     "extends": [
