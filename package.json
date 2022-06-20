@@ -5,6 +5,7 @@
   "dependencies": {
     "@babel/preset-env": "^7.18.2",
     "@babel/preset-react": "^7.17.12",
+    "@emotion/react": "^11.9.3",
     "@emotion/styled": "^11.9.3",
     "@iconscout/react-unicons": "^1.1.6",
     "@iconscout/react-unicons-solid": "^0.0.3",
@@ -40,7 +41,6 @@
     "build-prod": "webpack --mode=production",
     "serve": "react-scripts start",
     "webpack-dev-server": "webpack-dev-server"
-
   },
   "eslintConfig": {
     "extends": [
