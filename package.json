@@ -24,7 +24,6 @@
     "moralis": "^1.8.0",
     "notistack": "^2.0.5",
     "react": "^18.0.0",
-    "react-bottom-scroll-listener": "^5.0.0",
     "react-dom": "^18.0.0",
     "react-dotenv": "^0.1.3",
     "react-lazy-load-image-component": "^1.5.4",
@@ -45,7 +44,8 @@
     "build-prod": "webpack --mode=production",
     "serve": "react-scripts start",
     "webpack-dev-server": "webpack-dev-server",
-    "dev": "webpack-dev-server --mode=development"
+    "dev": "webpack-dev-server --mode=development",
+    "postinstall": "npm install react-bottom-scroll-listener@5.0.0 -f"
 
   },
   "eslintConfig": {
