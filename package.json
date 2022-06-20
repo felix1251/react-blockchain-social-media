@@ -5,10 +5,13 @@
   "dependencies": {
     "@babel/preset-env": "^7.18.2",
     "@babel/preset-react": "^7.17.12",
+    "@emotion/react": "^11.9.3",
+    "@emotion/styled": "^11.9.3",
     "@iconscout/react-unicons": "^1.1.6",
     "@iconscout/react-unicons-solid": "^0.0.3",
     "@mantine/core": "^4.2.10",
     "@mantine/hooks": "^4.2.10",
+    "@mui/material": "^5.8.4",
     "@walletconnect/web3-provider": "^1.7.8",
     "assert": "^2.0.0",
     "babel-preset-es2015": "^6.24.1",
@@ -31,13 +34,16 @@
     "react-scripts": "5.0.0",
     "source-map-loader": "^4.0.0",
     "stream-browserify": "^3.0.0",
+    "stream-http": "^3.2.0",
     "tabler-icons-react": "^1.48.1",
     "url": "^0.11.0",
     "uuid": "^8.3.2",
     "web-vitals": "^2.1.0",
-    "web3uikit": "0.1.66-beta.0"
+    "web3uikit": "^0.1.116"
   },
   "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts start",
     "build-prod": "webpack --mode=production",
     "build-dev": "webpack --mode=development",
     "webpack-dev-server": "webpack-dev-server"
@@ -46,6 +52,15 @@
     "extends": [
       "react-app"
     ]
+  },
+  "browser": {
+    "crypto": false,
+    "stream": false,
+    "assert": false,
+    "http": false,
+    "https": false,
+    "os": false,
+    "url": false
   },
   "browserslist": {
     "production": [

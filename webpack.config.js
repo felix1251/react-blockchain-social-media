@@ -11,9 +11,7 @@ module.exports = {
             filename: "bundle.js",
       },
       externalsPresets: { node: true }, // in order to ignore built-in modules like path, fs, etc.
-      externals: [nodeExternals({
-            importType: 'umd'
-      })],
+      externals: [nodeExternals()],
       module: {
             rules: [
                   {
@@ -71,12 +69,11 @@ module.exports = {
             historyApiFallback: true
       },
       resolve: {
-            extensions: ["*", ".js", ".jsx", ".css"],
             fallback: {
                   "crypto": require.resolve("crypto-browserify"),
                   "stream": require.resolve("stream-browserify"),
                   "assert": require.resolve("assert"),
-                  "http": false,
+                  "http": require.resolve("stream-http"),
                   "https": require.resolve("https-browserify"),
                   "os": require.resolve("os-browserify/browser"),
                   "url": require.resolve("url")

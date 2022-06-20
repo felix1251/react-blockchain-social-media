@@ -4,7 +4,7 @@ import App from "./App.js";
 import { MoralisProvider } from "react-moralis";
 
 ReactDOM.render(
-  <MoralisProvider appId={process.env.REACT_APP_MORALIS_APP_ID} serverUrl={process.env.REACT_APP_MORALIS_SERVER_URL} >
+  <MoralisProvider appId={"htfD1mv4ftJ2qWhnZctXBQ5KIGok11ljgSiI03vF"} serverUrl={"https://ctvvfafsmuwk.usemoralis.com:2053/server"} >
     <App />
   </MoralisProvider>,
   document.getElementById("root")
