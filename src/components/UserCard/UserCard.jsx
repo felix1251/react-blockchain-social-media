@@ -18,7 +18,7 @@ const UserCard = ({ username, ethAddress, followers, pfp, isMe, isFollowed, user
       if(res.status === "followed"){
         setFollowerCount(followerCount+1)
       }else{
-        setFollowerCount(followerCount-1)
+        if(followerCount !== 0 ) setFollowerCount(followerCount-1)
       }
     }
   }

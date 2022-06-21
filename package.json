@@ -2,9 +2,9 @@
   "name": "starter",
   "version": "0.1.0",
   "private": true,
+  "main": "index.js",
+  "license": "ISC",
   "dependencies": {
-    "@babel/preset-env": "^7.18.2",
-    "@babel/preset-react": "^7.17.12",
     "@emotion/react": "^11.9.3",
     "@emotion/styled": "^11.9.3",
     "@iconscout/react-unicons": "^1.1.6",
@@ -44,8 +44,8 @@
   },
   "scripts": {
     "dev": "webpack serve",
-    "start": "node server.js",
-    "build": "webpack --mode=production"
+    "start": "react-scripts start",
+    "build": "react-scripts build"
   },
   "eslintConfig": {
     "extends": [
@@ -73,14 +73,10 @@
       "last 1 safari version"
     ]
   },
-  "react-dotenv": {
-    "whitelist": [
-      "REACT_APP_MORALIS_SERVER_URL",
-      "REACT_APP_MORALIS_APP_ID"
-    ]
-  },
   "devDependencies": {
     "@babel/core": "^7.18.5",
+    "@babel/preset-env": "^7.18.2",
+    "@babel/preset-react": "^7.17.12",
     "@babel/preset-stage-3": "^7.8.3",
     "babel-loader": "^8.2.5",
     "css-loader": "^6.7.1",
