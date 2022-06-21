@@ -46,7 +46,6 @@ body{
 }
 
 .App{
-  overflow: hidden;
   color: var(--white);
   padding: 1rem 1rem;
 }
