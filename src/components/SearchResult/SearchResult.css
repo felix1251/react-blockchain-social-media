@@ -1,7 +1,7 @@
 .results{
       display: flex;
       flex-direction: row;
-      min-width: 200px;
+      min-width: 220px;
       align-items: center;
       gap: .5rem;
       border: 1px solid black;

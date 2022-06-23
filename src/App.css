@@ -61,18 +61,6 @@ body{
   }
 }
 
-/* @media only screen and (max-width: 1200px) {
-  .App {
-    margin-bottom: 50px;
-  }
-}
-
-@media only screen and (max-width: 500px) {
-  .App {
-    margin-bottom: 60px;
-  }
-} */
-
 .blur{
   position: absolute;
   width: 22rem;

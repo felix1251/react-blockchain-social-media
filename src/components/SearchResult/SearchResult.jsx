@@ -13,7 +13,7 @@ const SearchResult = (props) => {
                         alt=""
                   />
                   <div className='result-info'>
-                        <span>{username.slice(0, 20)} {username.length >= 20 && "..."}</span>
+                        <span>{username.slice(0, 15)}{username.length >= 15 && "..."}</span>
                         <span>{ethAddress.slice(0, 5)}...{ethAddress.slice(36)} </span>
                   </div>
             </Paper>

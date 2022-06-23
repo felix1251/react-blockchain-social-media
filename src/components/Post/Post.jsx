@@ -69,7 +69,8 @@ const Post = ({ data }) => {
     window.location.reload()
   }
 
-  const fetchModalComments = async () => {
+  const fetchModalComments = async (e) => {
+    e.preventDefault()
     if (modalComment.length === 0) {
       setOpened(true)
     }
@@ -156,7 +157,7 @@ const Post = ({ data }) => {
           <div>
             {like ? <UisRocket onClick={e => likePost(e)} className="Post-Icon-Liked" /> : <UilRocket className="Post-Icon" onClick={e => likePost(e)} />}
             <Indicator inline label={commentCount} size={17} color="red" offset={5} position="bottom-end" disabled={commentCount > 0 ? false : true}>
-              <UilCommentDots className="Post-Icon" onClick={() => fetchModalComments()} />
+              <UilCommentDots className="Post-Icon" onClick={(e) => fetchModalComments(e)} />
             </Indicator>
             <UilShare className="Post-Icon" onClick={() => sharePost()} />
           </div>

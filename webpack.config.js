@@ -11,7 +11,7 @@ module.exports = {
             filename: "bundle.js",
       },
       externalsPresets: { node: true }, // in order to ignore built-in modules like path, fs, etc.
-      externals: [nodeExternals()],
+      // externals: [nodeExternals()],
       module: {
             rules: [
                   {
