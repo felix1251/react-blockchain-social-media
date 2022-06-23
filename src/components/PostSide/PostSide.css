@@ -3,7 +3,7 @@
     flex-direction: column;
     gap: 1rem;
     height: 96vh;
-    overflow: auto;
+    overflow: scroll;
 }
 
 @media only screen and (max-width: 1200px) {

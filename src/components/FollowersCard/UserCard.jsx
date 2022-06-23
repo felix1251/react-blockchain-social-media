@@ -18,7 +18,7 @@ const UserCard = ({user, followUser}) => {
                               <img src={user?.pfp} alt="" className='followerImage' />
                         </Link>
                         <div className="name">
-                              <span>{user?.username.slice(0, 20)}{user?.username.length >= 20 && "..."}</span>
+                              <span>{user?.username.slice(0, 13)}{user?.username.length >= 13 && "..."}</span>
                               <span>{user?.ethAddress.slice(0, 5)}...{user?.ethAddress.slice(38)}</span>
                               <span>{count} followers</span>
                         </div>

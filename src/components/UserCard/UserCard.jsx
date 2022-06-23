@@ -30,7 +30,7 @@ const UserCard = ({ username, ethAddress, followers, pfp, isMe, isFollowed, user
           <LazyLoadImage className='user-image' src={pfp} alt="" />
         </Link>
         <div className='user-details'>
-          <span>{username.slice(0, 12)}{username.length >= 12 && "...."}</span>
+          <span>{username.slice(0, 13)}{username.length >= 13 && "...."}</span>
           <span>{ethAddress.slice(0, 5)}...{ethAddress.slice(38)}</span>
           <span> {followerCount} followers</span>
         </div>

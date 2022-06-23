@@ -128,8 +128,14 @@
 
 .Post>div>img {
     width: 100%;
-    max-height: 27rem;
+    max-height: 50rem;
     object-fit: cover;
+}
+
+@media only screen and (max-width: 500px) {
+    .Post>div>img {
+        max-height: 27rem;
+    }
 }
 
 .postReact {
