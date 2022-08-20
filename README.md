@@ -1,5 +1,5 @@
 A Blockchain Social Media using React and Moralis.
 
-npm install
+## npm install
 
-npm run start
+## npm run start
