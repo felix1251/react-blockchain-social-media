@@ -6,4 +6,4 @@ Demo: [Lixtagram Version 2](https://lixtagram-v2.onrender.com)
 ```
 npm install
 npm run start
-``
+```
